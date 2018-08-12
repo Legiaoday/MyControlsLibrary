@@ -19,7 +19,7 @@
             <summary>Sets if the control will have an animation when hiding/showing the control.</summary>
         </member>
         <member name="F:MyControlsLibrary.CustomTitleBar.AnimationInterval">
-            <summary>Sets how fast the animation plays. Lower values = fast animation, higher values = slow animation.</summary>
+            <summary>Sets how fast the animation plays in milliseconds. Lower values = fast animation, higher values = slow animation. Default value = 25.</summary>
         </member>
         <member name="P:MyControlsLibrary.CustomTitleBar.IsAutoHide">
             <summary>Sets if the control will auto hide after a certain period of time.</summary>

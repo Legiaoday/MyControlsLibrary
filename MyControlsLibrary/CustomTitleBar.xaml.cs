@@ -150,7 +150,7 @@ namespace MyControlsLibrary
                 if (!value) cancelAnimation();
             }
         }
-        ///<summary>Sets how fast the animation plays. Lower values = fast animation, higher values = slow animation.</summary>
+        ///<summary>Sets how fast the animation plays in milliseconds. Lower values = fast animation, higher values = slow animation. Default value = 25.</summary>
         public int AnimationInterval = 25;
         private bool isPlayingHideAnim = false;//indicates if the hide animation is being played
         private bool isPlayingShowAnim = false;//indicates if the show animation is being played
@@ -389,6 +389,14 @@ namespace MyControlsLibrary
             get { return closeButton.Visibility; }
             set { closeButton.Visibility = value; }
         }
+        #endregion
+
+        #region Title bar color
+
+        #endregion
+
+        #region Drag window maximized
+
         #endregion
     }
 }
