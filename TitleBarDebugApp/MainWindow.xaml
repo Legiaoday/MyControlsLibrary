@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TitleBarDebugApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" AllowsTransparency="True">
     <Grid Name="mainGrid"  Background="LightSkyBlue">
+        <Button Content="Button" HorizontalAlignment="Left" Margin="79,69,0,0" Click="Button_Click" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>

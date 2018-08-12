@@ -18,6 +18,8 @@ namespace TitleBarDebugApp
 {
     public partial class MainWindow : Window
     {
+        CustomTitleBar titleBar;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -26,7 +28,7 @@ namespace TitleBarDebugApp
 
         private void initTitleBar()
         {
-            CustomTitleBar titleBar = new CustomTitleBar(this, mainGrid);
+            titleBar = new CustomTitleBar(this, mainGrid);
             titleBar.Text = "Comments";
             titleBar.TextAlignment = HorizontalAlignment.Left;
             titleBar.Height = 24;
@@ -35,9 +37,18 @@ namespace TitleBarDebugApp
             titleBar.AutoHideDelay = 2000;
             titleBar.IsPlayAnimation = true;
             titleBar.AnimationInterval = 25;
+            titleBar.BackgroundOpacity = 0.5;
 
             //parent window configurations
             //commentsTxtB.Margin = new Thickness(0, titleBar.Height, 0,0);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if(titleBar != null)
+            {
+            
+            }
         }
     }
 }

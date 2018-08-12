@@ -19,13 +19,19 @@
             <summary>Sets if the control will have an animation when hiding/showing the control.</summary>
         </member>
         <member name="F:MyControlsLibrary.CustomTitleBar.AnimationInterval">
-            <summary>Sets how fast the animation plays. Lower values == fast animation, higher values == slow animation.</summary>
+            <summary>Sets how fast the animation plays. Lower values = fast animation, higher values = slow animation.</summary>
         </member>
         <member name="P:MyControlsLibrary.CustomTitleBar.IsAutoHide">
             <summary>Sets if the control will auto hide after a certain period of time.</summary>
         </member>
         <member name="F:MyControlsLibrary.CustomTitleBar.AutoHideDelay">
             <summary>Time in milliseconds that will pass before the control auto hides.</summary>
+        </member>
+        <member name="P:MyControlsLibrary.CustomTitleBar.BackgroundOpacity">
+            <summary>
+            Transparency value of the background. Values between 0 and 1, where 0 = completely transparent and 1 = completely opaque. For it to work the parent window AllowsTransparency property must be set to true.
+            <para>The AllowsTransparency property of a WPF window can only be set if the window has not been shown yet.</para>
+            </summary>
         </member>
         <member name="P:MyControlsLibrary.CustomTitleBar.Text">
             <summary>Text to be displayed in the title bar.</summary>

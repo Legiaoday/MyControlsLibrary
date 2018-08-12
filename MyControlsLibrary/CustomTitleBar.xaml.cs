@@ -150,7 +150,7 @@ namespace MyControlsLibrary
                 if (!value) cancelAnimation();
             }
         }
-        ///<summary>Sets how fast the animation plays. Lower values == fast animation, higher values == slow animation.</summary>
+        ///<summary>Sets how fast the animation plays. Lower values = fast animation, higher values = slow animation.</summary>
         public int AnimationInterval = 25;
         private bool isPlayingHideAnim = false;//indicates if the hide animation is being played
         private bool isPlayingShowAnim = false;//indicates if the show animation is being played
@@ -316,7 +316,38 @@ namespace MyControlsLibrary
         }
         #endregion
 
-        #region Generic properties
+        #region Generic public properties
+        #region Background transparency
+        private double backgroundOpacity = 1;
+        ///<summary>
+        ///Transparency value of the background. Values between 0 and 1, where 0 = completely transparent and 1 = completely opaque. For it to work the parent window AllowsTransparency property must be set to true.
+        ///<para>The AllowsTransparency property of a WPF window can only be set if the window has not been shown yet.</para>
+        ///</summary>
+        public double BackgroundOpacity
+        {
+            get { return backgroundOpacity; }
+
+            set
+            {
+                backgroundOpacity = value;
+                applyBackgroundTransparency();
+            }
+        }
+
+        private void applyBackgroundTransparency()
+        {
+            if (g_window.AllowsTransparency)//AllowsTransparency cannot be set after the window is shown, that's why it needs to be set in the xaml of the parent window or before the InitializeComponent() method in the parent window
+            {
+                g_window.WindowStyle = WindowStyle.None;//for the AllowsTransparency to work the window style needs to be set to none
+                this.Background = Brushes.Transparent;
+                headerLabel.Background = Brushes.Transparent;
+                dragGrid.Background = Brushes.Transparent;
+                buttonsStackPanel.Background = Brushes.Transparent;
+                mainGrid.Background.Opacity = BackgroundOpacity;
+            }
+        }
+        #endregion
+
         ///<summary>Text to be displayed in the title bar.</summary>
         public string Text
         {
@@ -352,7 +383,5 @@ namespace MyControlsLibrary
             set { closeButton.Visibility = value; }
         }
         #endregion
-
-
     }
 }
