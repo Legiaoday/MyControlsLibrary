@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MyControlsLibrary</name>
+    </assembly>
+    <members>
+        <member name="T:MyControlsLibrary.CustomTitleBar">
+            <summary>
+            CustomTitleBar
+            </summary>
+        </member>
+        <member name="M:MyControlsLibrary.CustomTitleBar.#ctor(System.Windows.Window,System.Windows.Controls.Grid)">
+            <summary>Creates a new title bar control to be used within another window with a grid as its first child.</summary>
+        </member>
+        <member name="F:MyControlsLibrary.CustomTitleBar.IsDraggingWindow">
+            <summary>Indicates if the control is being dragged around by the user.</summary>
+        </member>
+        <member name="P:MyControlsLibrary.CustomTitleBar.IsPlayAnimation">
+            <summary>Sets if the control will have an animation when hiding/showing the control.</summary>
+        </member>
+        <member name="F:MyControlsLibrary.CustomTitleBar.AnimationInterval">
+            <summary>Sets how fast the animation plays. Lower values == fast animation, higher values == slow animation.</summary>
+        </member>
+        <member name="P:MyControlsLibrary.CustomTitleBar.IsAutoHide">
+            <summary>Sets if the control will auto hide after a certain period of time.</summary>
+        </member>
+        <member name="F:MyControlsLibrary.CustomTitleBar.AutoHideDelay">
+            <summary>Time in milliseconds that will pass before the control auto hides.</summary>
+        </member>
+        <member name="P:MyControlsLibrary.CustomTitleBar.Text">
+            <summary>Text to be displayed in the title bar.</summary>
+        </member>
+        <member name="P:MyControlsLibrary.CustomTitleBar.TextAlignment">
+            <summary>Title bar's text alignment.</summary>
+        </member>
+        <member name="P:MyControlsLibrary.CustomTitleBar.MinimizeButtonVisibility">
+            <summary>Changes the visibility of the minimize button.</summary>
+        </member>
+        <member name="P:MyControlsLibrary.CustomTitleBar.MaximizeButtonVisibility">
+            <summary>Changes the visibility of the maximize button.</summary>
+        </member>
+        <member name="P:MyControlsLibrary.CustomTitleBar.CloseButtonVisibility">
+            <summary>Changes the visibility of the close button.</summary>
+        </member>
+        <member name="M:MyControlsLibrary.CustomTitleBar.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>
