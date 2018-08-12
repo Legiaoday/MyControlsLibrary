@@ -352,5 +352,7 @@ namespace MyControlsLibrary
             set { closeButton.Visibility = value; }
         }
         #endregion
+
+
     }
 }

@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:TitleBarDebugApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid Name="mainGrid">
-        
+    <Grid Name="mainGrid"  Background="LightSkyBlue">
     </Grid>
 </Window>
