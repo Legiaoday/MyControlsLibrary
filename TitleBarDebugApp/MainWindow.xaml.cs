@@ -40,14 +40,14 @@ namespace TitleBarDebugApp
             titleBar.BackgroundOpacity = 0.5;
 
             //parent window configurations
-            //commentsTxtB.Margin = new Thickness(0, titleBar.Height, 0,0);
+            workAreGrid.Margin = new Thickness(0, titleBar.Height, 0,0);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if(titleBar != null)
             {
-            
+                
             }
         }
     }

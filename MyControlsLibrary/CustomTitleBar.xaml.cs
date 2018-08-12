@@ -345,6 +345,13 @@ namespace MyControlsLibrary
                 buttonsStackPanel.Background = Brushes.Transparent;
                 mainGrid.Background.Opacity = BackgroundOpacity;
             }
+            else
+            {
+                if(backgroundOpacity < 1)
+                {
+                    MessageBox.Show("Background transparency can only be enabled if the window's AllowsTransparency property is set to true.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
         #endregion
 
