@@ -314,31 +314,31 @@ namespace MyControlsLibrary
         public string Text
         {
             get { return headerLabel.Content.ToString(); }
-
-            set
-            {
-                headerLabel.Content = value;
-            }
+            set { headerLabel.Content = value; }
         }
 
         public HorizontalAlignment TextAlignment
         {
             get { return headerLabel.HorizontalContentAlignment; }
-
-            set
-            {
-                headerLabel.HorizontalContentAlignment = value;
-            }
+            set { headerLabel.HorizontalContentAlignment = value; }
         }
 
         public Visibility MinimizeButtonVisibility
         {
             get { return minimizeButton.Visibility; }
+            set { minimizeButton.Visibility = value; }
+        }
 
-            set
-            {
-                minimizeButton.Visibility = value;
-            }
+        public Visibility MaximizeButtonVisibility
+        {
+            get { return maximizeButton.Visibility; }
+            set { maximizeButton.Visibility = value;}
+        }
+
+        public Visibility CloseButtonVisibility
+        {
+            get { return closeButton.Visibility; }
+            set { closeButton.Visibility = value; }
         }
         #endregion
     }
