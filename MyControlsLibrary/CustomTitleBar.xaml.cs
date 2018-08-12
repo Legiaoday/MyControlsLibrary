@@ -21,6 +21,7 @@ namespace MyControlsLibrary
     {
         private Window g_window;
 
+        ///<summary>Creates a new title bar control to be used within another window with a grid as its first child.</summary>
         public CustomTitleBar(Window parentWindow, Grid parentGrid)//both the window and the grid are automatically passed as references
         {
             InitializeComponent();
@@ -92,10 +93,11 @@ namespace MyControlsLibrary
         {
             windowDragOffset = e.GetPosition(mainGrid);
             createWindowDragTimer();//used to move the g_window around. A timer is being used instead of the mouse move event because if the user moves the cursor to either the top or left of the window too fast the event won't be able to keep up
-            isDraggingWindow = true;
+            IsDraggingWindow = true;
         }
 
-        public bool isDraggingWindow = false;
+        ///<summary>Indicates if the control is being dragged around by the user.</summary>
+        public bool IsDraggingWindow = false;
         private Point windowDragOffset = new Point(0, 0);//used to make the window appear in the right location when the user drags the title bar
         private DispatcherTimer windowDragTimer;//used to move the window around. A timer is being used instead of the mouse move event because if the user moves the cursor to either the top or left of the window too fast the event won't be able to keep up
 
@@ -129,7 +131,7 @@ namespace MyControlsLibrary
         private void endTempTabWinDrag()
         {
             windowDragTimer.Stop();
-            isDraggingWindow = false;
+            IsDraggingWindow = false;
         }
 
         #endregion
@@ -137,6 +139,7 @@ namespace MyControlsLibrary
         #region Hide/show controls
         #region Auto hide animation
         private bool isPlayAnimation = true;//sets if the the animation will be used to hide/show the control
+        ///<summary>Sets if the control will have an animation when hiding/showing the control.</summary>
         public bool IsPlayAnimation
         {
             get { return isPlayAnimation; }
@@ -146,8 +149,9 @@ namespace MyControlsLibrary
                 isPlayAnimation = value;
                 if (!value) cancelAnimation();
             }
-        }//public backing flag for playing the animation
-        public int AnimationInterval = 25;//sets how fast the animation plays, lower values == fast, higher values == slow
+        }
+        ///<summary>Sets how fast the animation plays. Lower values == fast animation, higher values == slow animation.</summary>
+        public int AnimationInterval = 25;
         private bool isPlayingHideAnim = false;//indicates if the hide animation is being played
         private bool isPlayingShowAnim = false;//indicates if the show animation is being played
         private DispatcherTimer controlAnimTimer;//main timer that will update the animation of the control based on isPlayingHideAnim and isPlayingShowAnim
@@ -222,7 +226,8 @@ namespace MyControlsLibrary
         #endregion
 
         private bool isAutoHide = false;//private backing flag for auto hiding
-        public bool IsAutoHide//public backing flag for auto hiding
+        ///<summary>Sets if the control will auto hide after a certain period of time.</summary>
+        public bool IsAutoHide
         {
             get { return isAutoHide; }
 
@@ -233,7 +238,8 @@ namespace MyControlsLibrary
                 if (!value) showControl(); else hideControl();
             }
         }
-        public int AutoHideDelay = 2000;//delay for auto hiding the control
+        ///<summary>Time in milliseconds that will pass before the control auto hides.</summary>
+        public int AutoHideDelay = 2000;
         private CancellationTokenSource cancelTokenTitleBar = new CancellationTokenSource();
 
         private async void hideControl()
@@ -267,7 +273,7 @@ namespace MyControlsLibrary
             }
         }
 
-        public void canceLTokenTitleBar()
+        private void canceLTokenTitleBar()
         {
             cancelTokenTitleBar.Cancel();
             cancelTokenTitleBar = new CancellationTokenSource();
@@ -291,7 +297,7 @@ namespace MyControlsLibrary
         #endregion
 
         #region Adjust controls' margins
-        Thickness resizeThic;
+        private Thickness resizeThic;
 
         private void buttonsStackPanel_SizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -311,30 +317,35 @@ namespace MyControlsLibrary
         #endregion
 
         #region Generic properties
+        ///<summary>Text to be displayed in the title bar.</summary>
         public string Text
         {
             get { return headerLabel.Content.ToString(); }
             set { headerLabel.Content = value; }
         }
 
+        ///<summary>Title bar's text alignment.</summary>
         public HorizontalAlignment TextAlignment
         {
             get { return headerLabel.HorizontalContentAlignment; }
             set { headerLabel.HorizontalContentAlignment = value; }
         }
 
+        ///<summary>Changes the visibility of the minimize button.</summary>
         public Visibility MinimizeButtonVisibility
         {
             get { return minimizeButton.Visibility; }
             set { minimizeButton.Visibility = value; }
         }
 
+        ///<summary>Changes the visibility of the maximize button.</summary>
         public Visibility MaximizeButtonVisibility
         {
             get { return maximizeButton.Visibility; }
             set { maximizeButton.Visibility = value;}
         }
 
+        ///<summary>Changes the visibility of the close button.</summary>
         public Visibility CloseButtonVisibility
         {
             get { return closeButton.Visibility; }
