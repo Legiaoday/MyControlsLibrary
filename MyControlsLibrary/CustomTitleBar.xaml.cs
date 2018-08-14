@@ -89,11 +89,45 @@ namespace MyControlsLibrary
         #endregion
 
         #region Move the parent window around
+        #region Drag window maximized
+        //used in g_window__MouseMove to tell if the drag of the window when in maximized mode should be initiated
+        //the window dragging when maximized is being initiated in the g_window__MouseMove event because changing the window state in the dragGrid_MouseDown event will not take effect immediately, thus the offset will be wrong
+        bool isDragMaximized = false;
+        double dragGridMaxiWidth;//width of the dragGrid when maximized
+
+        //uses rule of three to get the correct offset when the window is maximized
+        private void doDragmaximized()
+        {
+            isDragMaximized = false;
+            dragGridMaxiWidth = dragGrid.ActualWidth;//used to get the correct offset when maximized, need to come right before g_window.WindowState = WindowState.Normal;
+            g_window.WindowState = WindowState.Normal;
+
+            //at this point the values of dragGrid width and height are NaN or the old values, that's why (g_window.Width - buttonsStackPanel.ActualWidth) is used instead of dragGrid.ActualWidth or dragGrid.Width
+            windowDragOffset.X = (g_window.Width - buttonsStackPanel.ActualWidth) * windowDragOffset.X / dragGridMaxiWidth;//rule of three to get the correct offset
+
+            createWindowDragTimer();//used to move the g_window around. A timer is being used instead of the mouse move event because if the user moves the cursor to either the top or left of the window too fast the event won't be able to keep up
+            IsDraggingWindow = true;
+        }
+
+        private void dragGrid_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isDragMaximized) doDragmaximized();//used to get the correct offset when maximized
+        }
+        #endregion
+
         private void dragGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
             windowDragOffset = e.GetPosition(mainGrid);
-            createWindowDragTimer();//used to move the g_window around. A timer is being used instead of the mouse move event because if the user moves the cursor to either the top or left of the window too fast the event won't be able to keep up
-            IsDraggingWindow = true;
+
+            if (g_window.WindowState == WindowState.Maximized)//used to get the correct offset when maximized
+            {
+                isDragMaximized = true;//used to get the correct offset when maximized
+            }
+            if (g_window.WindowState == WindowState.Normal)
+            {
+                createWindowDragTimer();//used to move the g_window around. A timer is being used instead of the mouse move event because if the user moves the cursor to either the top or left of the window too fast the event won't be able to keep up
+                IsDraggingWindow = true;
+            }
         }
 
         ///<summary>Indicates if the control is being dragged around by the user.</summary>
@@ -250,7 +284,7 @@ namespace MyControlsLibrary
 
                 if (!isPlayAnimation)
                     mainGrid.Visibility = Visibility.Hidden;
-                else
+                else if (!IsDraggingWindow)//this is here because of the dragging window when maximized
                     startHideAnimation();
             }
             catch (TaskCanceledException ex)
@@ -412,8 +446,6 @@ namespace MyControlsLibrary
         }
         #endregion
 
-        #region Drag window maximized
-
-        #endregion
+        
     }
 }
