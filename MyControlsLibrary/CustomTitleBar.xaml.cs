@@ -111,7 +111,10 @@ namespace MyControlsLibrary
 
         private void dragGrid_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isDragMaximized) doDragmaximized();//used to get the correct offset when maximized
+            if (isDragMaximized)
+            {
+                doDragmaximized();//used to get the correct offset when maximized
+            }
         }
         #endregion
 
@@ -121,12 +124,15 @@ namespace MyControlsLibrary
 
             if (g_window.WindowState == WindowState.Maximized)//used to get the correct offset when maximized
             {
-                isDragMaximized = true;//used to get the correct offset when maximized
+                if (WindowDragMode == DragMode.Both || WindowDragMode == DragMode.Maximized) isDragMaximized = true;//used to get the correct offset when maximized
             }
             if (g_window.WindowState == WindowState.Normal)
             {
-                createWindowDragTimer();//used to move the g_window around. A timer is being used instead of the mouse move event because if the user moves the cursor to either the top or left of the window too fast the event won't be able to keep up
-                IsDraggingWindow = true;
+                if (WindowDragMode == DragMode.Both || WindowDragMode == DragMode.Normal)
+                {
+                    createWindowDragTimer();//used to move the g_window around. A timer is being used instead of the mouse move event because if the user moves the cursor to either the top or left of the window too fast the event won't be able to keep up
+                    IsDraggingWindow = true; 
+                }
             }
         }
 
@@ -444,8 +450,22 @@ namespace MyControlsLibrary
             get { return closeButton.Visibility; }
             set { closeButton.Visibility = value; }
         }
+
+        public DragMode WindowDragMode = DragMode.Both; 
+        public enum DragMode
+        {
+            ///<summary>The window cannot be dragged at all.</summary>
+            None,
+            ///<summary>The window can only be dragged when its state is set to normal.</summary>
+            Normal,
+            ///<summary>The window can only initiate drag when its state is set to maximized.</summary>
+            Maximized,
+            ///<summary>The window can be dragged when in both normal and maximized states.</summary>
+            Both
+        }
         #endregion
 
-        
+        //adjust hitbox of the close button
+        //fix the dragGrid cursor when drag is disabled
     }
 }

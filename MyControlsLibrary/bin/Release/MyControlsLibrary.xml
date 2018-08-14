@@ -57,6 +57,18 @@
         <member name="P:MyControlsLibrary.CustomTitleBar.CloseButtonVisibility">
             <summary>Changes the visibility of the close button.</summary>
         </member>
+        <member name="F:MyControlsLibrary.CustomTitleBar.DragMode.None">
+            <summary>The window cannot be dragged at all.</summary>
+        </member>
+        <member name="F:MyControlsLibrary.CustomTitleBar.DragMode.Normal">
+            <summary>The window can only be dragged when its state is set to normal.</summary>
+        </member>
+        <member name="F:MyControlsLibrary.CustomTitleBar.DragMode.Maximized">
+            <summary>The window can only initiate drag when its state is set to maximized.</summary>
+        </member>
+        <member name="F:MyControlsLibrary.CustomTitleBar.DragMode.Both">
+            <summary>The window can be dragged when in both normal and maximized states.</summary>
+        </member>
         <member name="M:MyControlsLibrary.CustomTitleBar.InitializeComponent">
             <summary>
             InitializeComponent
