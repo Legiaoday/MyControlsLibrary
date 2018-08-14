@@ -29,9 +29,9 @@ namespace TitleBarDebugApp
         private void initTitleBar()
         {
             titleBar = new CustomTitleBar(this, mainGrid);
-            titleBar.Text = "Comments";
+            titleBar.Text = "Comments qgj";
             titleBar.TextAlignment = HorizontalAlignment.Left;
-            titleBar.Height = 24;
+            titleBar.Height = 26;//recommended height = 26
             titleBar.MinimizeButtonVisibility = Visibility.Collapsed;
             titleBar.IsAutoHide = true;
             titleBar.AutoHideDelay = 2000;

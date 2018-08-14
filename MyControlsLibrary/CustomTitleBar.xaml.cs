@@ -201,6 +201,7 @@ namespace MyControlsLibrary
             if (!isPlayingHideAnim && !isPlayingShowAnim)
             {
                 mainGrid.VerticalAlignment = VerticalAlignment.Top;
+                mainGrid.Height = this.ActualHeight;//used to avoid a bug that resizes the mainGrid's height to 25.96 when the hide/show animation plays
                 controlAnimTimer = new DispatcherTimer();
                 controlAnimTimer.Interval = TimeSpan.FromMilliseconds(AnimationInterval);
                 controlAnimTimer.Tick += new EventHandler(doAnimation_Tick);
@@ -216,6 +217,7 @@ namespace MyControlsLibrary
             if (!isPlayingHideAnim && !isPlayingShowAnim)
             {
                 mainGrid.VerticalAlignment = VerticalAlignment.Top;
+                mainGrid.Height = this.ActualHeight;//used to avoid a bug that resizes the mainGrid's height to 25.96 when the hide/show animation plays
                 controlAnimTimer = new DispatcherTimer();
                 controlAnimTimer.Interval = TimeSpan.FromMilliseconds(AnimationInterval);
                 controlAnimTimer.Tick += new EventHandler(doAnimation_Tick);
@@ -465,7 +467,6 @@ namespace MyControlsLibrary
         }
         #endregion
 
-        //adjust hitbox of the close button
         //fix the dragGrid cursor when drag is disabled
     }
 }

@@ -5,14 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MyControlsLibrary"
              mc:Ignorable="d" 
-             d:DesignHeight="24" d:DesignWidth="800" Name="windowHeader" Background="Transparent" VerticalAlignment="Top" MouseEnter="windowHeader_MouseEnter" MouseLeave="windowHeader_MouseLeave">
+             d:DesignHeight="26" d:DesignWidth="800" Name="windowHeader" Background="Transparent" VerticalAlignment="Top" MouseEnter="windowHeader_MouseEnter" MouseLeave="windowHeader_MouseLeave">
     <Grid Name="mainGrid" Background="#FF363636">
-        <Label x:Name="headerLabel" Content="Title Bar" Background="Transparent" Margin="0,-2,0,0" HorizontalAlignment="Stretch" Foreground="#FFDEDEDE" IsHitTestVisible="False"/>
+        <Label x:Name="headerLabel" Content="Title Bar" Background="Transparent" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" Foreground="#FFDEDEDE" IsHitTestVisible="False"/>
         <Grid x:Name="dragGrid" Cursor="SizeAll" Background="Transparent" MouseDown="dragGrid_MouseDown" MouseMove="dragGrid_MouseMove"/>
         <StackPanel Name="buttonsStackPanel" HorizontalAlignment="Right" Orientation="Horizontal" SizeChanged="buttonsStackPanel_SizeChanged">
-            <Button x:Name="minimizeButton" FontFamily="Marlett" FontSize="16" Content="0" HorizontalContentAlignment="Center" Focusable="False" Click="minimizeButton_Click" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Background="#ffcc00" Width="28"/>
-            <Button x:Name="maximizeButton" FontFamily="Marlett" FontSize="16" Content="1" HorizontalContentAlignment="Center" Focusable="False" Click="maximizeButton_Click" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Background="#FF2D8CFF" Width="28"/>
-            <Button x:Name="closeButton" FontFamily="Marlett" FontSize="16" Content="r" Focusable="False" Click="closeButton_Click" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Background="#FFFF3737" Width="28"/>
+            <Button x:Name="minimizeButton" FontFamily="Marlett" FontSize="16" VerticalAlignment="Stretch" Content="0" HorizontalContentAlignment="Center" Focusable="False" Click="minimizeButton_Click" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Background="#ffcc00" Width="28"/>
+            <Button x:Name="maximizeButton" FontFamily="Marlett" FontSize="16" VerticalAlignment="Stretch" Content="1" HorizontalContentAlignment="Center" Focusable="False" Click="maximizeButton_Click" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Background="#FF2D8CFF" Width="28"/>
+            <Button x:Name="closeButton" FontFamily="Marlett" FontSize="16" VerticalAlignment="Stretch" Content="r" Focusable="False" Click="closeButton_Click" Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Background="#FFFF3737" Width="28"/>
         </StackPanel>
     </Grid>
 </UserControl>
