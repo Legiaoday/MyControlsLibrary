@@ -33,6 +33,15 @@
             <para>The AllowsTransparency property of a WPF window can only be set if the window has not been shown yet.</para>
             </summary>
         </member>
+        <member name="P:MyControlsLibrary.CustomTitleBar.BackgroundColor">
+            <summary>Background color of the title bar.</summary>
+        </member>
+        <member name="M:MyControlsLibrary.CustomTitleBar.SetBackgroundColorHex(System.String)">
+            <summary>
+            Sets the background color based on a hexadecimal color code. The color code is composed of four sets of two hexadecimal numbers like for example: #FF0fa7ff
+            <para>The first two digits being the alpha transparency (FF), the third and fourth being the red (0f), the fifth and sixty being the green (a7) and the seventh and eighth being the blue (ff). You can omit the transparency if you wish.</para>
+            </summary>
+        </member>
         <member name="P:MyControlsLibrary.CustomTitleBar.Text">
             <summary>Text to be displayed in the title bar.</summary>
         </member>

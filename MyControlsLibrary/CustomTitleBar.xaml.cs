@@ -355,6 +355,27 @@ namespace MyControlsLibrary
         }
         #endregion
 
+        #region Background color
+        ///<summary>Background color of the title bar.</summary>
+        public Brush BackgroundColor
+        {
+            get { return mainGrid.Background; }
+
+            set { mainGrid.Background = value; }
+        }
+
+        /// <summary>
+        /// Sets the background color based on a hexadecimal color code. The color code is composed of four sets of two hexadecimal numbers like for example: #FF0fa7ff
+        /// <para>The first two digits being the alpha transparency (FF), the third and fourth being the red (0f), the fifth and sixty being the green (a7) and the seventh and eighth being the blue (ff). You can omit the transparency if you wish.</para>
+        /// </summary>
+        public void SetBackgroundColorHex(string hexColor)
+        {
+            BrushConverter converter = new BrushConverter();
+            Brush brush = (Brush)converter.ConvertFromString(hexColor);
+            mainGrid.Background = brush;
+        }
+        #endregion
+
         ///<summary>Text to be displayed in the title bar.</summary>
         public string Text
         {
@@ -389,10 +410,6 @@ namespace MyControlsLibrary
             get { return closeButton.Visibility; }
             set { closeButton.Visibility = value; }
         }
-        #endregion
-
-        #region Title bar color
-
         #endregion
 
         #region Drag window maximized

@@ -38,6 +38,8 @@ namespace TitleBarDebugApp
             titleBar.IsPlayAnimation = true;
             titleBar.AnimationInterval = 25;
             titleBar.BackgroundOpacity = 0.5;
+            //titleBar.BackgroundColor = Brushes.DarkCyan;
+            titleBar.SetBackgroundColorHex("#FF0fa7ff");//00 = black, ff = white
 
             //parent window configurations
             workAreGrid.Margin = new Thickness(0, titleBar.Height, 0,0);
