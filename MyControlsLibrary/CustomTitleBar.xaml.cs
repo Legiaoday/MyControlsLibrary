@@ -38,6 +38,7 @@ namespace MyControlsLibrary
             g_window.ResizeMode = ResizeMode.NoResize;
             g_window.StateChanged += new EventHandler(g_window__StateChanged);
             g_window.Loaded += new RoutedEventHandler(g_window__Loaded);
+            //g_window.Icon
         }
 
         private void changeMaxResButton()
@@ -468,5 +469,7 @@ namespace MyControlsLibrary
         #endregion
 
         //fix the dragGrid cursor when drag is disabled
+        //add double click maximize title bar
+        //add icon to title bar
     }
 }
