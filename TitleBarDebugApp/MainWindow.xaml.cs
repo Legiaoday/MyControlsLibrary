@@ -29,7 +29,7 @@ namespace TitleBarDebugApp
 
         private void initTitleBar()
         {
-            titleBar = new CustomTitleBar(this, mainGrid, "dasdsa");//overloaded function that also accepts an icon as parameter, this icon parameter is optional
+            titleBar = new CustomTitleBar(this, mainGrid, "icon2.ico");//overloaded function that also accepts an icon as parameter, this icon parameter is optional
             //titleBar = new CustomTitleBar(this, mainGrid);
             titleBar.Text = "Comments qgjjjjjjjjjjjjjjjjjjjjjjjjgggggggggggggggggggggggggggggggg";
             titleBar.TextAlignment = HorizontalAlignment.Left;
