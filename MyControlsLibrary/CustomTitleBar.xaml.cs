@@ -141,6 +141,14 @@ namespace MyControlsLibrary
         {
             if (e.ChangedButton == MouseButton.Left)
             {
+                if(e.ClickCount == 2)//checks for double click on the drag bar
+                {
+                    if(g_window.WindowState == WindowState.Maximized)
+                        g_window.WindowState = WindowState.Normal;
+                    else if (g_window.WindowState == WindowState.Normal)
+                        g_window.WindowState = WindowState.Maximized;
+                }
+
                 windowDragOffset = e.GetPosition(mainGrid);
 
                 if (g_window.WindowState == WindowState.Maximized)//used to get the correct offset when maximized
