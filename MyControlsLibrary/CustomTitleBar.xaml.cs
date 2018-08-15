@@ -125,9 +125,14 @@ namespace MyControlsLibrary
 
         private void dragGrid_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed && isDragMaximized)
+            if (e.LeftButton == MouseButtonState.Pressed && isFirstDrag)
             {
-                doDragmaximized();//used to get the correct offset when maximized
+                isFirstDrag = false;
+
+                if (isDragMaximized)
+                    doDragmaximized();//used to get the correct offset when maximized
+                else if (IsDraggingWindow)
+                    createWindowDragTimer();//used to move the g_window around. A timer is being used instead of the mouse move event because if the user moves the cursor to either the top or left of the window too fast the event won't be able to keep up
             }
         }
         #endregion
@@ -140,15 +145,19 @@ namespace MyControlsLibrary
 
                 if (g_window.WindowState == WindowState.Maximized)//used to get the correct offset when maximized
                 {
-                    if (WindowDragMode == DragMode.Both || WindowDragMode == DragMode.Maximized) isDragMaximized = true;//used to get the correct offset when maximized
+                    if (WindowDragMode == DragMode.Both || WindowDragMode == DragMode.Maximized)
+                    {
+                        isDragMaximized = true;//used to get the correct offset when maximized
+                        isFirstDrag = true;
+                    }
                 }
                 if (g_window.WindowState == WindowState.Normal)
                 {
                     if (WindowDragMode == DragMode.Both || WindowDragMode == DragMode.Normal)
                     {
-                        createWindowDragTimer();//used to move the g_window around. A timer is being used instead of the mouse move event because if the user moves the cursor to either the top or left of the window too fast the event won't be able to keep up
                         IsDraggingWindow = true;
-                    }
+                        isFirstDrag = true;
+                    } 
                 } 
             }
         }
@@ -157,6 +166,7 @@ namespace MyControlsLibrary
         public bool IsDraggingWindow = false;
         private Point windowDragOffset = new Point(0, 0);//used to make the window appear in the right location when the user drags the title bar
         private DispatcherTimer windowDragTimer;//used to move the window around. A timer is being used instead of the mouse move event because if the user moves the cursor to either the top or left of the window too fast the event won't be able to keep up
+        private bool isFirstDrag = false;//used in the dragGrid_MouseMove event to initiate the dragging of the window only once (because the mouse move keeps being fired as long as the user moves the mouse cursor)
 
         private void createWindowDragTimer()
         {
