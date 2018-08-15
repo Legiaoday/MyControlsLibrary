@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MyControlsLibrary;
+//using System.Runtime.InteropServices;
 
 namespace TitleBarDebugApp
 {
@@ -28,8 +29,9 @@ namespace TitleBarDebugApp
 
         private void initTitleBar()
         {
-            titleBar = new CustomTitleBar(this, mainGrid);
-            titleBar.Text = "Comments qgj";
+            titleBar = new CustomTitleBar(this, mainGrid, "dasdsa");//overloaded function that also accepts an icon as parameter, this icon parameter is optional
+            //titleBar = new CustomTitleBar(this, mainGrid);
+            titleBar.Text = "Comments qgjjjjjjjjjjjjjjjjjjjjjjjjgggggggggggggggggggggggggggggggg";
             titleBar.TextAlignment = HorizontalAlignment.Left;
             titleBar.Height = 26;//recommended height = 26
             titleBar.MinimizeButtonVisibility = Visibility.Collapsed;

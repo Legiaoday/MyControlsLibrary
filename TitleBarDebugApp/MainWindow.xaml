@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TitleBarDebugApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" AllowsTransparency="true" WindowStyle="None" Background="Wheat">
+        Title="MainWindow" Height="450" Width="800" AllowsTransparency="True" WindowStyle="None" Background="Wheat">
     <Grid Name="mainGrid"  Background="Transparent">
         <Grid Name="workAreGrid" Background="SkyBlue">
             <Button Content="Button" HorizontalAlignment="Left" Margin="79,69,0,0" Click="Button_Click" VerticalAlignment="Top" Width="75"/>
+            <Image Name="img" HorizontalAlignment="Left" Height="100" Margin="312,69,0,0" VerticalAlignment="Top" Width="100"/>
         </Grid>
      </Grid>
 </Window>

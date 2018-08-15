@@ -31,6 +31,20 @@ namespace MyControlsLibrary
             initControls();
         }
 
+        ///<summary>
+        ///Creates a new title bar control to be used within another window with a grid as its first child and an icon.
+        ///<para>The icon must be a local resource name in the parent window's project (e.g. "icon.ico"). If no icon with the given name is found then the title bar will try to extract the icon from its parent window's assembly.</para>
+        ///</summary>
+        public CustomTitleBar(Window parentWindow, Grid parentGrid, string icon)//both the window and the grid are automatically passed as references
+        {
+            InitializeComponent();
+            parentGrid.Children.Add(this);
+            g_window = parentWindow;
+
+            initControls();
+            getIconFromResource(icon);
+        }
+
         #region Generic methods
         private void initControls()
         {
@@ -38,7 +52,6 @@ namespace MyControlsLibrary
             g_window.ResizeMode = ResizeMode.NoResize;
             g_window.StateChanged += new EventHandler(g_window__StateChanged);
             g_window.Loaded += new RoutedEventHandler(g_window__Loaded);
-            //g_window.Icon
         }
 
         private void changeMaxResButton()
@@ -470,6 +483,49 @@ namespace MyControlsLibrary
 
         //fix the dragGrid cursor when drag is disabled
         //add double click maximize title bar
-        //add icon to title bar
+
+        #region Get parent window icon
+        private void getIconFromResource(string iconResourceOrPath)
+        {
+            try
+            {
+                BitmapImage icon = new BitmapImage();
+                icon.BeginInit();
+                icon.UriSource = new Uri("pack://application:,,,/" + iconResourceOrPath);
+                icon.EndInit();
+
+                titleBarImgIcon.Source = icon;
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.ToString());
+                getIconFromAssembly();
+            }
+        }
+
+        [System.Runtime.InteropServices.DllImport("gdi32.dll", SetLastError = true)]
+        private static extern bool DeleteObject(IntPtr hObject);
+
+        private void getIconFromAssembly()
+        {
+            try
+            {
+                System.Reflection.Assembly currentAssembly = System.Reflection.Assembly.GetEntryAssembly();//gets the title bar parent window's assembly path
+                System.Drawing.Icon icon = System.Drawing.Icon.ExtractAssociatedIcon(currentAssembly.Location);
+                System.Drawing.Bitmap bitmap = icon.ToBitmap();
+                icon.Dispose();
+                IntPtr hBitmap = bitmap.GetHbitmap();
+
+                ImageSource wpfBitmap = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(hBitmap, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                titleBarImgIcon.Source = wpfBitmap;
+
+                if (!DeleteObject(hBitmap)) throw new System.ComponentModel.Win32Exception();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        } 
+        #endregion
     }
 }

@@ -12,6 +12,12 @@
         <member name="M:MyControlsLibrary.CustomTitleBar.#ctor(System.Windows.Window,System.Windows.Controls.Grid)">
             <summary>Creates a new title bar control to be used within another window with a grid as its first child.</summary>
         </member>
+        <member name="M:MyControlsLibrary.CustomTitleBar.#ctor(System.Windows.Window,System.Windows.Controls.Grid,System.String)">
+            <summary>
+            Creates a new title bar control to be used within another window with a grid as its first child and an icon.
+            <para>The icon must be a local resource name in the parent window's project (e.g. "icon.ico"). If no icon with the given name is found then the title bar will try to extract the icon from its parent window's assembly.</para>
+            </summary>
+        </member>
         <member name="F:MyControlsLibrary.CustomTitleBar.IsDraggingWindow">
             <summary>Indicates if the control is being dragged around by the user.</summary>
         </member>
