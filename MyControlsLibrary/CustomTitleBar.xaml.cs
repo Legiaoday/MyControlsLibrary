@@ -484,7 +484,7 @@ namespace MyControlsLibrary
         //fix the dragGrid cursor when drag is disabled
         //add double click maximize title bar
 
-        #region Get parent window icon
+        #region Title bar icon
         private void getIconFromResource(string iconResourceOrPath)
         {
             try
@@ -508,23 +508,23 @@ namespace MyControlsLibrary
 
         private void getIconFromAssembly()
         {
-            try
-            {
-                System.Reflection.Assembly currentAssembly = System.Reflection.Assembly.GetEntryAssembly();//gets the title bar parent window's assembly path
-                System.Drawing.Icon icon = System.Drawing.Icon.ExtractAssociatedIcon(currentAssembly.Location);
-                System.Drawing.Bitmap bitmap = icon.ToBitmap();
-                icon.Dispose();
-                IntPtr hBitmap = bitmap.GetHbitmap();
+            //try
+            //{
+            //    System.Reflection.Assembly currentAssembly = System.Reflection.Assembly.GetEntryAssembly();//gets the title bar parent window's assembly path
+            //    System.Drawing.Icon icon = System.Drawing.Icon.ExtractAssociatedIcon(currentAssembly.Location);
+            //    System.Drawing.Bitmap bitmap = icon.ToBitmap();
+            //    icon.Dispose();
+            //    IntPtr hBitmap = bitmap.GetHbitmap();
 
-                ImageSource wpfBitmap = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(hBitmap, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
-                titleBarImgIcon.Source = wpfBitmap;
+            //    ImageSource wpfBitmap = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(hBitmap, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+            //    titleBarImgIcon.Source = wpfBitmap;
 
-                if (!DeleteObject(hBitmap)) throw new System.ComponentModel.Win32Exception();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            //    if (!DeleteObject(hBitmap)) throw new System.ComponentModel.Win32Exception();
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw;
+            //}
         } 
         #endregion
     }
