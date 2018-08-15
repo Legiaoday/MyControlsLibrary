@@ -139,7 +139,7 @@ namespace MyControlsLibrary
 
         private void dragGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            //all this move window and double is just a mess, try not changing anything
+            //all this move window and double click is just a mess, try not changing anything
 
             if (e.ChangedButton == MouseButton.Left)
             {
@@ -154,6 +154,8 @@ namespace MyControlsLibrary
                         g_window.WindowState = WindowState.Normal;
                     else if (g_window.WindowState == WindowState.Normal)
                         g_window.WindowState = WindowState.Maximized;
+
+                    if (isAutoHide) hideControl();
                 }
                 else
                 {
