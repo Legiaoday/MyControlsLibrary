@@ -43,6 +43,7 @@ namespace TitleBarDebugApp
             //titleBar.BackgroundColor = Brushes.DarkCyan;
             titleBar.SetBackgroundColorHex("#FF0fa7ff");//00 = black, ff = white
             titleBar.WindowDragMode = CustomTitleBar.DragMode.Both;
+            titleBar.DoubleClickResize = true;
 
             //parent window configurations
             workAreGrid.Margin = new Thickness(0, titleBar.Height, 0,0);

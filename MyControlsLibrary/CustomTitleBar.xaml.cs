@@ -143,7 +143,7 @@ namespace MyControlsLibrary
 
             if (e.ChangedButton == MouseButton.Left)
             {
-                if(e.ClickCount == 2)//checks for double click on the drag bar
+                if(e.ClickCount == 2 && isDoubleClickResize)//checks for double click on the drag bar
                 {
                     IsDraggingWindow = false;//needed here to avoid bug
                     isFirstDrag = false;//needed here to avoid bug
@@ -461,6 +461,14 @@ namespace MyControlsLibrary
             mainGrid.Background = brush;
         }
         #endregion
+
+        private bool isDoubleClickResize = true;
+        ///<summary>Indicates whether or not it should change the state of the window when the title bar is double clicked.</summary>
+        public bool DoubleClickResize
+        {
+            get { return isDoubleClickResize; }
+            set { isDoubleClickResize = value; }
+        }
 
         ///<summary>Text to be displayed in the title bar.</summary>
         public string Text
