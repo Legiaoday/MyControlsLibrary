@@ -125,7 +125,7 @@ namespace MyControlsLibrary
 
         private void dragGrid_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isDragMaximized)
+            if (e.LeftButton == MouseButtonState.Pressed && isDragMaximized)
             {
                 doDragmaximized();//used to get the correct offset when maximized
             }
@@ -134,19 +134,22 @@ namespace MyControlsLibrary
 
         private void dragGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            windowDragOffset = e.GetPosition(mainGrid);
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                windowDragOffset = e.GetPosition(mainGrid);
 
-            if (g_window.WindowState == WindowState.Maximized)//used to get the correct offset when maximized
-            {
-                if (WindowDragMode == DragMode.Both || WindowDragMode == DragMode.Maximized) isDragMaximized = true;//used to get the correct offset when maximized
-            }
-            if (g_window.WindowState == WindowState.Normal)
-            {
-                if (WindowDragMode == DragMode.Both || WindowDragMode == DragMode.Normal)
+                if (g_window.WindowState == WindowState.Maximized)//used to get the correct offset when maximized
                 {
-                    createWindowDragTimer();//used to move the g_window around. A timer is being used instead of the mouse move event because if the user moves the cursor to either the top or left of the window too fast the event won't be able to keep up
-                    IsDraggingWindow = true; 
+                    if (WindowDragMode == DragMode.Both || WindowDragMode == DragMode.Maximized) isDragMaximized = true;//used to get the correct offset when maximized
                 }
+                if (g_window.WindowState == WindowState.Normal)
+                {
+                    if (WindowDragMode == DragMode.Both || WindowDragMode == DragMode.Normal)
+                    {
+                        createWindowDragTimer();//used to move the g_window around. A timer is being used instead of the mouse move event because if the user moves the cursor to either the top or left of the window too fast the event won't be able to keep up
+                        IsDraggingWindow = true;
+                    }
+                } 
             }
         }
 
