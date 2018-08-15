@@ -139,34 +139,43 @@ namespace MyControlsLibrary
 
         private void dragGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            //all this move window and double is just a mess, try not changing anything
+
             if (e.ChangedButton == MouseButton.Left)
             {
                 if(e.ClickCount == 2)//checks for double click on the drag bar
                 {
-                    if(g_window.WindowState == WindowState.Maximized)
+                    IsDraggingWindow = false;//needed here to avoid bug
+                    isFirstDrag = false;//needed here to avoid bug
+                    isDragMaximized = false;//needed here to avoid bug
+                    if (windowDragTimer != null) windowDragTimer.Stop();//needed here to avoid bug
+
+                    if (g_window.WindowState == WindowState.Maximized)
                         g_window.WindowState = WindowState.Normal;
                     else if (g_window.WindowState == WindowState.Normal)
                         g_window.WindowState = WindowState.Maximized;
                 }
-
-                windowDragOffset = e.GetPosition(mainGrid);
-
-                if (g_window.WindowState == WindowState.Maximized)//used to get the correct offset when maximized
+                else
                 {
-                    if (WindowDragMode == DragMode.Both || WindowDragMode == DragMode.Maximized)
+                    windowDragOffset = e.GetPosition(mainGrid);
+
+                    if (g_window.WindowState == WindowState.Maximized)//used to get the correct offset when maximized
                     {
-                        isDragMaximized = true;//used to get the correct offset when maximized
-                        isFirstDrag = true;
+                        if (WindowDragMode == DragMode.Both || WindowDragMode == DragMode.Maximized)
+                        {
+                            isDragMaximized = true;//used to get the correct offset when maximized
+                            isFirstDrag = true;
+                        }
+                    }
+                    if (g_window.WindowState == WindowState.Normal)
+                    {
+                        if (WindowDragMode == DragMode.Both || WindowDragMode == DragMode.Normal)
+                        {
+                            IsDraggingWindow = true;
+                            isFirstDrag = true;
+                        }
                     }
                 }
-                if (g_window.WindowState == WindowState.Normal)
-                {
-                    if (WindowDragMode == DragMode.Both || WindowDragMode == DragMode.Normal)
-                    {
-                        IsDraggingWindow = true;
-                        isFirstDrag = true;
-                    } 
-                } 
             }
         }
 
@@ -547,6 +556,6 @@ namespace MyControlsLibrary
         #endregion
 
         //fix the dragGrid cursor when drag is disabled
-        //add double click maximize title bar
+        //add auto size by dragging near the corners of the screen
     }
 }
