@@ -32,7 +32,6 @@ namespace TitleBarDebugApp
             titleBar.WindowDragMode = CustomTitleBar.DragMode.Both;
             titleBar.DoubleClickResize = true;
             titleBar.FullScreenMode = false;
-            titleBar.EnableDrag = true;
             titleBar.TextColor = Brushes.Pink;
             //titleBar.SetTextColorHex("#FF4bff14");//00 = black, ff = white
 
@@ -42,12 +41,7 @@ namespace TitleBarDebugApp
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if(!titleBar.EnableDrag)
-                titleBar.EnableDrag = true;
-            else
-                titleBar.EnableDrag = false;
-
-            btn.Content = titleBar.EnableDrag.ToString();
+            
         }
     }
 }

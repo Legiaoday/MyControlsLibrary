@@ -62,12 +62,40 @@ namespace MyControlsLibrary
                 maximizeButton.Content = 1;
             }
         }
+
+        private void setCursor()
+        {
+            if (g_window.WindowState == WindowState.Maximized)
+            {
+                if (windowDragMode == DragMode.Both || windowDragMode == DragMode.Maximized)
+                {
+                    dragGrid.Cursor = Cursors.SizeAll;
+                }
+                else
+                {
+                    dragGrid.Cursor = Cursors.Arrow;
+                }
+            }
+            else if (g_window.WindowState == WindowState.Normal)
+            {
+                if (windowDragMode == DragMode.Both || windowDragMode == DragMode.Normal)
+                {
+                    dragGrid.Cursor = Cursors.SizeAll;
+                }
+                else
+                {
+                    dragGrid.Cursor = Cursors.Arrow;
+                }
+            }
+                
+        }
         #endregion
 
         #region Generic events
         private void g_window__StateChanged(object sender, EventArgs e)
         {
             changeMaxResButton();
+            setCursor();
         }
 
         private void g_window__Loaded(object sender, RoutedEventArgs e)
@@ -153,11 +181,11 @@ namespace MyControlsLibrary
 
                     if (isAutoHide) hideControl();
                 }
-                else if (isDragEnabled)
+                else
                 {
                     windowDragOffset = e.GetPosition(mainGrid);
 
-                    if (g_window.WindowState == WindowState.Maximized)//used to get the correct offset when maximized
+                    if (g_window.WindowState == WindowState.Maximized && (windowDragMode == DragMode.Both || windowDragMode == DragMode.Maximized))//used to get the correct offset when maximized
                     {
                         if (WindowDragMode == DragMode.Both || WindowDragMode == DragMode.Maximized)
                         {
@@ -165,7 +193,7 @@ namespace MyControlsLibrary
                             isFirstDrag = true;
                         }
                     }
-                    if (g_window.WindowState == WindowState.Normal)
+                    if (g_window.WindowState == WindowState.Normal && (windowDragMode == DragMode.Both || windowDragMode == DragMode.Normal))
                     {
                         if (WindowDragMode == DragMode.Both || WindowDragMode == DragMode.Normal)
                         {
@@ -182,23 +210,6 @@ namespace MyControlsLibrary
         private Point windowDragOffset = new Point(0, 0);//used to make the window appear in the right location when the user drags the title bar
         private DispatcherTimer windowDragTimer;//used to move the window around. A timer is being used instead of the mouse move event because if the user moves the cursor to either the top or left of the window too fast the event won't be able to keep up
         private bool isFirstDrag = false;//used in the dragGrid_MouseMove event to initiate the dragging of the window only once (because the mouse move keeps being fired as long as the user moves the mouse cursor)
-
-        private bool isDragEnabled = true;
-        ///<summary>Indicates if the window will be draggable via the title bar.</summary>
-        public bool EnableDrag
-        {
-            get { return isDragEnabled; }
-
-            set
-            {
-                isDragEnabled = value;
-
-                if (value)
-                    dragGrid.Cursor = Cursors.SizeAll;
-                else
-                    dragGrid.Cursor = Cursors.Arrow;
-            }
-        }
 
         private void createWindowDragTimer()
         {
@@ -552,7 +563,13 @@ namespace MyControlsLibrary
             set { closeButton.Visibility = value; }
         }
 
-        public DragMode WindowDragMode = DragMode.Both; 
+        private DragMode windowDragMode = DragMode.Both;
+        public DragMode WindowDragMode
+        {
+            get { return windowDragMode; }
+            set { windowDragMode = value; setCursor(); }
+        }
+
         public enum DragMode
         {
             ///<summary>The window cannot be dragged at all.</summary>
