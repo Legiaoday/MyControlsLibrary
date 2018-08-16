@@ -1,5 +1,7 @@
 ﻿using System.Windows;
 using MyControlsLibrary;
+using System.Windows.Media;
+
 //using System.Runtime.InteropServices;
 
 namespace TitleBarDebugApp
@@ -33,6 +35,8 @@ namespace TitleBarDebugApp
             titleBar.DoubleClickResize = true;
             titleBar.FullScreenMode = false;
             titleBar.EnableDrag = true;
+            titleBar.TextColor = Brushes.Pink;
+            //titleBar.SetTextColorHex("#FF4bff14");//00 = black, ff = white
 
             //parent window configurations
             workAreGrid.Margin = new Thickness(0, titleBar.Height, 0,0);

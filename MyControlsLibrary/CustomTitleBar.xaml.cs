@@ -488,6 +488,27 @@ namespace MyControlsLibrary
         }
         #endregion
 
+        #region Text color
+        ///<summary>Text color of the title bar.</summary>
+        public Brush TextColor
+        {
+            get { return headerLabel.Foreground; }
+
+            set { headerLabel.Foreground = value; }
+        }
+
+        /// <summary>
+        /// Sets the text color based on a hexadecimal color code. The color code is composed of four sets of two hexadecimal numbers like for example: #FF0fa7ff
+        /// <para>The first two digits being the alpha transparency (FF), the third and fourth being the red (0f), the fifth and sixty being the green (a7) and the seventh and eighth being the blue (ff). You can omit the transparency if you wish.</para>
+        /// </summary>
+        public void SetTextColorHex(string hexColor)
+        {
+            BrushConverter converter = new BrushConverter();
+            Brush brush = (Brush)converter.ConvertFromString(hexColor);
+            headerLabel.Foreground = brush;
+        }
+        #endregion
+
         private bool isDoubleClickResize = true;
         ///<summary>Indicates whether or not it should change the state of the window when the title bar is double clicked.</summary>
         public bool DoubleClickResize

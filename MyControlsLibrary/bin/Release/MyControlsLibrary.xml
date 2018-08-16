@@ -51,6 +51,15 @@
             <para>The first two digits being the alpha transparency (FF), the third and fourth being the red (0f), the fifth and sixty being the green (a7) and the seventh and eighth being the blue (ff). You can omit the transparency if you wish.</para>
             </summary>
         </member>
+        <member name="P:MyControlsLibrary.CustomTitleBar.TextColor">
+            <summary>Text color of the title bar.</summary>
+        </member>
+        <member name="M:MyControlsLibrary.CustomTitleBar.SetTextColorHex(System.String)">
+            <summary>
+            Sets the text color based on a hexadecimal color code. The color code is composed of four sets of two hexadecimal numbers like for example: #FF0fa7ff
+            <para>The first two digits being the alpha transparency (FF), the third and fourth being the red (0f), the fifth and sixty being the green (a7) and the seventh and eighth being the blue (ff). You can omit the transparency if you wish.</para>
+            </summary>
+        </member>
         <member name="P:MyControlsLibrary.CustomTitleBar.DoubleClickResize">
             <summary>Indicates whether or not it should change the state of the window when the title bar is double clicked.</summary>
         </member>
