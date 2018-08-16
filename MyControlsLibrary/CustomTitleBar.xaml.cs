@@ -179,7 +179,7 @@ namespace MyControlsLibrary
                     else if (g_window.WindowState == WindowState.Normal)
                         g_window.WindowState = WindowState.Maximized;
 
-                    if (isAutoHide) hideControl();
+                    if (isAutoHide) HideControl();
                 }
                 else
                 {
@@ -349,7 +349,7 @@ namespace MyControlsLibrary
 
                 if (value) 
                 {
-                    hideControl();
+                    HideControl();
                 }
                 else
                 {
@@ -362,37 +362,43 @@ namespace MyControlsLibrary
         public int AutoHideDelay = 2000;
         private CancellationTokenSource cancelTokenTitleBar = new CancellationTokenSource();
 
-        private async void hideControl()
+        public async void HideControl()
         {
-            try
+            if (isAutoHide)
             {
-                await Task.Delay(AutoHideDelay, cancelTokenTitleBar.Token);
-
-                if (isAutoHide)//needed here to avoid a bug, the user can change the value of isAutoHide while the task is waiting, making the mainGrid be permanently hidden
+                try
                 {
-                    if (!isPlayAnimation)
-                        mainGrid.Visibility = Visibility.Hidden;
-                    else if (!IsDraggingWindow)//this is here because of the dragging window when maximized
-                        startHideAnimation(); 
-                }
-            }
-            catch (TaskCanceledException ex)
-            {
+                    await Task.Delay(AutoHideDelay, cancelTokenTitleBar.Token);
 
+                    if (isAutoHide)//needed here to avoid a bug, the user can change the value of isAutoHide while the task is waiting, making the mainGrid be permanently hidden
+                    {
+                        if (!isPlayAnimation)
+                            mainGrid.Visibility = Visibility.Hidden;
+                        else if (!IsDraggingWindow)//this is here because of the dragging window when maximized
+                            startHideAnimation();
+                    }
+                }
+                catch (TaskCanceledException ex)
+                {
+
+                } 
             }
         }
 
-        private void showControl()
+        public void ShowControl()
         {
-            canceLTokenTitleBar();
+            if (isAutoHide)
+            {
+                canceLTokenTitleBar();
 
-            if (!isPlayAnimation)
-            {
-                mainGrid.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                startShowAnimation();
+                if (!isPlayAnimation)
+                {
+                    mainGrid.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    startShowAnimation();
+                } 
             }
         }
 
@@ -406,7 +412,7 @@ namespace MyControlsLibrary
         {
             if (isAutoHide)
             {
-                showControl();
+                ShowControl();
             }
         }
 
@@ -414,7 +420,7 @@ namespace MyControlsLibrary
         {
             if (isAutoHide)
             {
-                hideControl();
+                HideControl();
             }
         }
         #endregion

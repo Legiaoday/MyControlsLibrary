@@ -22,7 +22,7 @@ namespace TitleBarDebugApp
             titleBar.TextAlignment = HorizontalAlignment.Left;
             titleBar.Height = 22;//recommended height = 22
             titleBar.MinimizeButtonVisibility = Visibility.Collapsed;
-            titleBar.IsAutoHide = false;
+            titleBar.IsAutoHide = true;
             titleBar.AutoHideDelay = 2000;
             titleBar.IsPlayAnimation = true;
             titleBar.AnimationInterval = 25;
