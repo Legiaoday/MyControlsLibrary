@@ -326,7 +326,15 @@ namespace MyControlsLibrary
             {
                 isAutoHide = value;
 
-                if (!value) showControl(); else hideControl();
+                if (value) 
+                {
+                    hideControl();
+                }
+                else
+                {
+                    cancelAnimation();
+                    mainGrid.Visibility = Visibility.Visible;
+                }
             }
         }
         ///<summary>Time in milliseconds that will pass before the control auto hides.</summary>
@@ -339,10 +347,13 @@ namespace MyControlsLibrary
             {
                 await Task.Delay(AutoHideDelay, cancelTokenTitleBar.Token);
 
-                if (!isPlayAnimation)
-                    mainGrid.Visibility = Visibility.Hidden;
-                else if (!IsDraggingWindow)//this is here because of the dragging window when maximized
-                    startHideAnimation();
+                if (isAutoHide)//needed here to avoid a bug, the user can change the value of isAutoHide while the task is waiting, making the mainGrid be permanently hidden
+                {
+                    if (!isPlayAnimation)
+                        mainGrid.Visibility = Visibility.Hidden;
+                    else if (!IsDraggingWindow)//this is here because of the dragging window when maximized
+                        startHideAnimation(); 
+                }
             }
             catch (TaskCanceledException ex)
             {

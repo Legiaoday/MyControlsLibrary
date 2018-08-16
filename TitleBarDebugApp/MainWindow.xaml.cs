@@ -35,7 +35,7 @@ namespace TitleBarDebugApp
             titleBar.TextAlignment = HorizontalAlignment.Left;
             titleBar.Height = 26;//recommended height = 26
             titleBar.MinimizeButtonVisibility = Visibility.Collapsed;
-            titleBar.IsAutoHide = true;
+            titleBar.IsAutoHide = false;
             titleBar.AutoHideDelay = 2000;
             titleBar.IsPlayAnimation = true;
             titleBar.AnimationInterval = 25;
@@ -52,10 +52,12 @@ namespace TitleBarDebugApp
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if(!titleBar.FullScreenMode)
-                titleBar.FullScreenMode = true;
+            if(!titleBar.IsAutoHide)
+                titleBar.IsAutoHide = true;
             else
-                titleBar.FullScreenMode = false;
+                titleBar.IsAutoHide = false;
+
+            btn.Content = titleBar.IsAutoHide.ToString();
         }
     }
 }
