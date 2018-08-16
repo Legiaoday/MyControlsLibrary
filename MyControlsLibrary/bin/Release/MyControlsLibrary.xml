@@ -78,6 +78,27 @@
         <member name="F:MyControlsLibrary.CustomTitleBar.DragMode.Both">
             <summary>The window can be dragged when in both normal and maximized states.</summary>
         </member>
+        <member name="P:MyControlsLibrary.CustomTitleBar.FullScreenMode">
+            <summary>If fullscreen mode is enabled when maximized the window will cover the whole screen, including the taskbar.</summary>
+        </member>
+        <member name="F:MyControlsLibrary.CustomTitleBar.POINT.x">
+            <summary>x coordinate of point.</summary>
+        </member>
+        <member name="F:MyControlsLibrary.CustomTitleBar.POINT.y">
+            <summary>y coordinate of point.</summary>
+        </member>
+        <member name="M:MyControlsLibrary.CustomTitleBar.POINT.#ctor(System.Int32,System.Int32)">
+            <summary>Construct a point of coordinates (x,y).</summary>
+        </member>
+        <member name="M:MyControlsLibrary.CustomTitleBar.RECT.GetHashCode">
+            <summary>Return the HashCode for this struct (not garanteed to be unique)</summary>
+        </member>
+        <member name="M:MyControlsLibrary.CustomTitleBar.RECT.op_Equality(MyControlsLibrary.CustomTitleBar.RECT,MyControlsLibrary.CustomTitleBar.RECT)">
+            <summary> Determine if 2 RECT are equal (deep compare)</summary>
+        </member>
+        <member name="M:MyControlsLibrary.CustomTitleBar.RECT.op_Inequality(MyControlsLibrary.CustomTitleBar.RECT,MyControlsLibrary.CustomTitleBar.RECT)">
+            <summary> Determine if 2 RECT are different(deep compare)</summary>
+        </member>
         <member name="M:MyControlsLibrary.CustomTitleBar.InitializeComponent">
             <summary>
             InitializeComponent

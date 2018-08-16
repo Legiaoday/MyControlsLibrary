@@ -44,6 +44,7 @@ namespace TitleBarDebugApp
             titleBar.SetBackgroundColorHex("#FF0fa7ff");//00 = black, ff = white
             titleBar.WindowDragMode = CustomTitleBar.DragMode.Both;
             titleBar.DoubleClickResize = true;
+            titleBar.FullScreenMode = false;
 
             //parent window configurations
             workAreGrid.Margin = new Thickness(0, titleBar.Height, 0,0);
@@ -51,10 +52,10 @@ namespace TitleBarDebugApp
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if(titleBar != null)
-            {
-                
-            }
+            if(!titleBar.FullScreenMode)
+                titleBar.FullScreenMode = true;
+            else
+                titleBar.FullScreenMode = false;
         }
     }
 }
