@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Threading;
 using System.Runtime.InteropServices;
@@ -51,7 +44,7 @@ namespace MyControlsLibrary
         private void initControls()
         {
             g_window.WindowStyle = WindowStyle.None;
-            g_window.ResizeMode = ResizeMode.NoResize;
+            //g_window.ResizeMode = ResizeMode.CanResizeWithGrip;
             g_window.StateChanged += new EventHandler(g_window__StateChanged);
             g_window.Loaded += new RoutedEventHandler(g_window__Loaded);
             initOverlapProc();//this is to avoid the window overlapping the taskbar
@@ -571,7 +564,7 @@ namespace MyControlsLibrary
             }
         }
 
-        [System.Runtime.InteropServices.DllImport("gdi32.dll", SetLastError = true)]
+        [DllImport("gdi32.dll", SetLastError = true)]
         private static extern bool DeleteObject(IntPtr hObject);
 
         private void getIconFromAssembly()
@@ -584,7 +577,7 @@ namespace MyControlsLibrary
                 icon.Dispose();
                 IntPtr hBitmap = bitmap.GetHbitmap();
 
-                ImageSource wpfBitmap = System.Windows.Interop.Imaging.CreateBitmapSourceFromHBitmap(hBitmap, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+                ImageSource wpfBitmap = Imaging.CreateBitmapSourceFromHBitmap(hBitmap, IntPtr.Zero, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
                 titleBarImgIcon.Source = wpfBitmap;
 
                 if (!DeleteObject(hBitmap)) throw new System.ComponentModel.Win32Exception();
@@ -741,9 +734,5 @@ namespace MyControlsLibrary
         [DllImport("User32")]
         internal static extern IntPtr MonitorFromWindow(IntPtr handle, int flags);
         #endregion
-
-        //add auto size by dragging near the corners of the screen
-
-
     }
 }
