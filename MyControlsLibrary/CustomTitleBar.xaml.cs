@@ -160,7 +160,7 @@ namespace MyControlsLibrary
 
                     if (isAutoHide) hideControl();
                 }
-                else
+                else if (isDragEnabled)
                 {
                     windowDragOffset = e.GetPosition(mainGrid);
 
@@ -189,6 +189,23 @@ namespace MyControlsLibrary
         private Point windowDragOffset = new Point(0, 0);//used to make the window appear in the right location when the user drags the title bar
         private DispatcherTimer windowDragTimer;//used to move the window around. A timer is being used instead of the mouse move event because if the user moves the cursor to either the top or left of the window too fast the event won't be able to keep up
         private bool isFirstDrag = false;//used in the dragGrid_MouseMove event to initiate the dragging of the window only once (because the mouse move keeps being fired as long as the user moves the mouse cursor)
+
+        private bool isDragEnabled = true;
+        ///<summary>Indicates if the window will be draggable via the title bar.</summary>
+        public bool EnableDrag
+        {
+            get { return isDragEnabled; }
+
+            set
+            {
+                isDragEnabled = value;
+
+                if (value)
+                    dragGrid.Cursor = Cursors.SizeAll;
+                else
+                    dragGrid.Cursor = Cursors.Arrow;
+            }
+        }
 
         private void createWindowDragTimer()
         {
@@ -725,7 +742,6 @@ namespace MyControlsLibrary
         internal static extern IntPtr MonitorFromWindow(IntPtr handle, int flags);
         #endregion
 
-        //fix the dragGrid cursor when drag is disabled
         //add auto size by dragging near the corners of the screen
 
 

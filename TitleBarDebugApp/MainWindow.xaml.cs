@@ -45,6 +45,7 @@ namespace TitleBarDebugApp
             titleBar.WindowDragMode = CustomTitleBar.DragMode.Both;
             titleBar.DoubleClickResize = true;
             titleBar.FullScreenMode = false;
+            titleBar.EnableDrag = true;
 
             //parent window configurations
             workAreGrid.Margin = new Thickness(0, titleBar.Height, 0,0);
@@ -52,12 +53,12 @@ namespace TitleBarDebugApp
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if(!titleBar.IsAutoHide)
-                titleBar.IsAutoHide = true;
+            if(!titleBar.EnableDrag)
+                titleBar.EnableDrag = true;
             else
-                titleBar.IsAutoHide = false;
+                titleBar.EnableDrag = false;
 
-            btn.Content = titleBar.IsAutoHide.ToString();
+            btn.Content = titleBar.EnableDrag.ToString();
         }
     }
 }
