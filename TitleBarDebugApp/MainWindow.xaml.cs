@@ -26,13 +26,13 @@ namespace TitleBarDebugApp
             titleBar.AutoHideDelay = 2000;
             titleBar.IsPlayAnimation = true;
             titleBar.AnimationInterval = 25;
-            titleBar.BackgroundOpacity = 0.5;
             //titleBar.BackgroundColor = Brushes.DarkCyan;
             titleBar.SetBackgroundColorHex("#FF0fa7ff");//00 = black, ff = white
+            titleBar.BackgroundOpacity = 0.5;
             titleBar.WindowDragMode = CustomTitleBar.DragMode.Both;
             titleBar.DoubleClickResize = true;
             titleBar.FullScreenMode = false;
-            titleBar.TextColor = Brushes.Pink;
+            titleBar.TextColor = Brushes.Black;
             //titleBar.SetTextColorHex("#FF4bff14");//00 = black, ff = white
 
             //parent window configurations
@@ -41,7 +41,7 @@ namespace TitleBarDebugApp
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
+
         }
     }
 }
