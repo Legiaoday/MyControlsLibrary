@@ -2,8 +2,6 @@
 using MyControlsLibrary;
 using System.Windows.Media;
 
-//using System.Runtime.InteropServices;
-
 namespace TitleBarDebugApp
 {
     public partial class MainWindow : Window
@@ -22,7 +20,7 @@ namespace TitleBarDebugApp
             //titleBar = new CustomTitleBar(this, mainGrid);
             titleBar.Text = "Comments qgjjjjjjjjjjjjjjjjjjjjjjjjgggggggggggggggggggggggggggggggg";
             titleBar.TextAlignment = HorizontalAlignment.Left;
-            titleBar.Height = 22;//recommended height = 26
+            titleBar.Height = 22;//recommended height = 22
             titleBar.MinimizeButtonVisibility = Visibility.Collapsed;
             titleBar.IsAutoHide = false;
             titleBar.AutoHideDelay = 2000;

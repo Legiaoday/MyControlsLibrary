@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MyControlsLibrary"
              mc:Ignorable="d" 
-             d:DesignHeight="20" d:DesignWidth="800" Name="windowHeader" Background="Transparent" VerticalAlignment="Top" MouseEnter="windowHeader_MouseEnter" MouseLeave="windowHeader_MouseLeave">
+             d:DesignHeight="22" d:DesignWidth="800" Name="windowHeader" Background="Transparent" VerticalAlignment="Top" MouseEnter="windowHeader_MouseEnter" MouseLeave="windowHeader_MouseLeave">
     <Grid Name="mainGrid" Background="#FF363636">
         <DockPanel x:Name="iconStackPanel" HorizontalAlignment="Left" IsHitTestVisible="False">
             <Image x:Name="titleBarImgIcon"/>
