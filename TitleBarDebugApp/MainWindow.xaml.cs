@@ -23,9 +23,9 @@ namespace TitleBarDebugApp
             titleBar.Height = 22;//recommended height = 22
             titleBar.MinimizeButtonVisibility = Visibility.Collapsed;
             titleBar.IsAutoHide = true;
-            titleBar.AutoHideDelay = 4000;
+            titleBar.AutoHideDelay = 10;
             titleBar.IsPlayAnimation = true;
-            titleBar.AnimationInterval = 15;
+            titleBar.AnimationInterval = 50;
             //titleBar.BackgroundColor = Brushes.DarkCyan;
             titleBar.SetBackgroundColorHex("#FF0fa7ff");//00 = black, ff = white
             titleBar.BackgroundOpacity = 0.7;

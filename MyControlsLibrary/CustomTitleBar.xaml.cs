@@ -268,34 +268,40 @@ namespace MyControlsLibrary
 
         private void startHideAnimation()
         {
-            if (!isPlayingHideAnim && !isPlayingShowAnim)
+            if (this.ActualHeight > 0)//this.ActualHeight > 0 is needed because if this method is called before the title bar is loaded it will brake everything, this is to avoid this breaking. Also don't change the order of the IFsand isPlayingShowAnim/isPlayingHideAnim in this method
             {
-                mainGrid.VerticalAlignment = VerticalAlignment.Top;
-                mainGrid.Height = this.ActualHeight;//used to avoid a bug that resizes the mainGrid's height to 25.96 when the hide/show animation plays
-                controlAnimTimer = new DispatcherTimer();
-                controlAnimTimer.Interval = TimeSpan.FromMilliseconds(AnimationInterval);
-                controlAnimTimer.Tick += new EventHandler(doAnimation_Tick);
-                controlAnimTimer.Start();
-            }
+                if (!isPlayingHideAnim && !isPlayingShowAnim)
+                {
+                    mainGrid.Height = this.ActualHeight;//used to avoid a bug that resizes the mainGrid's height to 25.96 when the hide/show animation plays
+                    mainGrid.VerticalAlignment = VerticalAlignment.Top;
+                    controlAnimTimer = new DispatcherTimer();
+                    controlAnimTimer.Interval = TimeSpan.FromMilliseconds(AnimationInterval);
+                    controlAnimTimer.Tick += new EventHandler(doAnimation_Tick);
+                    controlAnimTimer.Start();
+                }
 
-            isPlayingHideAnim = true;
-            isPlayingShowAnim = false;
+                isPlayingHideAnim = true;
+                isPlayingShowAnim = false;
+            }
         }
 
         private void startShowAnimation()
         {
-            if (!isPlayingHideAnim && !isPlayingShowAnim)
+            if (this.ActualHeight > 0)//this.ActualHeight > 0 is needed because if this method is called before the title bar is loaded it will brake everything, this is to avoid this breaking. Also don't change the order of the IFsand isPlayingShowAnim/isPlayingHideAnim in this method
             {
-                mainGrid.VerticalAlignment = VerticalAlignment.Top;
-                mainGrid.Height = this.ActualHeight;//used to avoid a bug that resizes the mainGrid's height to 25.96 when the hide/show animation plays
-                controlAnimTimer = new DispatcherTimer();
-                controlAnimTimer.Interval = TimeSpan.FromMilliseconds(AnimationInterval);
-                controlAnimTimer.Tick += new EventHandler(doAnimation_Tick);
-                controlAnimTimer.Start();
-            }
+                if (!isPlayingHideAnim && !isPlayingShowAnim)
+                {
+                    mainGrid.Height = this.ActualHeight;//used to avoid a bug that resizes the mainGrid's height to 25.96 when the hide/show animation plays
+                    mainGrid.VerticalAlignment = VerticalAlignment.Top;
+                    controlAnimTimer = new DispatcherTimer();
+                    controlAnimTimer.Interval = TimeSpan.FromMilliseconds(AnimationInterval);
+                    controlAnimTimer.Tick += new EventHandler(doAnimation_Tick);
+                    controlAnimTimer.Start();
+                }
 
-            isPlayingShowAnim = true;
-            isPlayingHideAnim = false;
+                isPlayingShowAnim = true;
+                isPlayingHideAnim = false;
+            }
         }
 
         private void doAnimation_Tick(object sender, EventArgs e)
@@ -347,7 +353,7 @@ namespace MyControlsLibrary
             {
                 isAutoHide = value;
 
-                if (value) 
+                if (value)
                 {
                     HideControl();
                 }
