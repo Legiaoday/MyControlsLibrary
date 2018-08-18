@@ -362,6 +362,7 @@ namespace MyControlsLibrary
         public int AutoHideDelay = 2000;
         private CancellationTokenSource cancelTokenTitleBar = new CancellationTokenSource();
 
+        ///<summary>Hides the control.</summary>
         public async void HideControl()
         {
             if (isAutoHide)
@@ -385,6 +386,7 @@ namespace MyControlsLibrary
             }
         }
 
+        ///<summary>Shows the control.</summary>
         public void ShowControl()
         {
             if (isAutoHide)
