@@ -41,14 +41,6 @@ namespace TitleBarDebugApp
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (titleBar.Visibility == Visibility.Collapsed)
-            {
-                titleBar.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                titleBar.Visibility = Visibility.Collapsed;
-            }
         }
     }
 }
