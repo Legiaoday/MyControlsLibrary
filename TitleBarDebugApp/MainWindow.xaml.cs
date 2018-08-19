@@ -23,7 +23,7 @@ namespace TitleBarDebugApp
             titleBar.Height = 22;//recommended height = 22
             titleBar.MinimizeButtonVisibility = Visibility.Collapsed;
             titleBar.IsAutoHide = true;
-            titleBar.AutoHideDelay = 10;
+            titleBar.AutoHideDelay = 2000;
             titleBar.IsPlayAnimation = true;
             titleBar.AnimationInterval = 50;
             //titleBar.BackgroundColor = Brushes.DarkCyan;
@@ -41,7 +41,14 @@ namespace TitleBarDebugApp
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            if (titleBar.Visibility == Visibility.Collapsed)
+            {
+                titleBar.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                titleBar.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

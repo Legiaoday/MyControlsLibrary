@@ -786,5 +786,7 @@ namespace MyControlsLibrary
         [DllImport("User32")]
         internal static extern IntPtr MonitorFromWindow(IntPtr handle, int flags);
         #endregion
+
+        
     }
 }
