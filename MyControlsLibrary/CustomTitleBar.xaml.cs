@@ -801,12 +801,11 @@ namespace MyControlsLibrary
                 TBDragStart(this, new TBDragEventArgs(currentPos));
             }
         }
-
         #endregion
     }
 
     #region Drag start event class, handle and delegate
-    //this needs to be out of the escope of the main class
+    //these need to be out of the escope of the main class
     public delegate void TBDragEventHandler(object source, TBDragEventArgs e);
 
     public class TBDragEventArgs : EventArgs
