@@ -243,8 +243,8 @@ namespace MyControlsLibrary
         {
             windowDragTimer.Stop();
             IsDraggingWindow = false;
+            doDragEndEvent();
         }
-
         #endregion
 
         #region Hide/show controls
@@ -790,6 +790,7 @@ namespace MyControlsLibrary
 
         #region Drag start event
         public event TBDragEventHandler TBDragStart;//event name that will be called by the programs that use this library
+        public event TBDragEventHandler TBDragEnd;//event name that will be called by the programs that use this library
 
         private void doDragStartEvent()
         {
@@ -801,6 +802,17 @@ namespace MyControlsLibrary
                 TBDragStart(this, new TBDragEventArgs(currentPos));
             }
         }
+
+        private void doDragEndEvent()
+        {
+            //To make sure we only trigger the event if a handler is present
+            //we check the event to make sure it's not null.
+            if (TBDragEnd != null)
+            {
+                Point currentPos = new Point(System.Windows.Forms.Cursor.Position.X, System.Windows.Forms.Cursor.Position.Y);
+                TBDragEnd(this, new TBDragEventArgs(currentPos));
+            }
+        }
         #endregion
     }
 
@@ -810,14 +822,14 @@ namespace MyControlsLibrary
 
     public class TBDragEventArgs : EventArgs
     {
-        //<summary>Mouse cursor position over the desktop when the dragging started.</summary>
+        //<summary>Mouse cursor position over the desktop when the event is called.</summary>
         private Point MousePosition;
 
         public TBDragEventArgs(Point pos)
         {
             MousePosition = pos;
         }
-        public Point GetInfo()
+        public Point GetPoint()
         {
             return MousePosition;
         }
