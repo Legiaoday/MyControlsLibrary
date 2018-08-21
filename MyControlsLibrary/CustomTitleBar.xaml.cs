@@ -213,6 +213,7 @@ namespace MyControlsLibrary
 
         private void createWindowDragTimer()
         {
+            doDragStartEvent();
             windowDragTimer = new DispatcherTimer();
             windowDragTimer.Interval = TimeSpan.FromMilliseconds(1);
             windowDragTimer.Tick += new EventHandler(moveWindow_Tick);
@@ -785,6 +786,42 @@ namespace MyControlsLibrary
 
         [DllImport("User32")]
         internal static extern IntPtr MonitorFromWindow(IntPtr handle, int flags);
-        #endregion 
+        #endregion
+
+        #region Drag start event
+        public event TBDragEventHandler TBDragStart;//event name that will be called by the programs that use this library
+
+        private void doDragStartEvent()
+        {
+            //To make sure we only trigger the event if a handler is present
+            //we check the event to make sure it's not null.
+            if (TBDragStart != null)
+            {
+                Point currentPos = new Point(System.Windows.Forms.Cursor.Position.X, System.Windows.Forms.Cursor.Position.Y);
+                TBDragStart(this, new TBDragEventArgs(currentPos));
+            }
+        }
+
+        #endregion
     }
+
+    #region Drag start event class, handle and delegate
+    //this needs to be out of the escope of the main class
+    public delegate void TBDragEventHandler(object source, TBDragEventArgs e);
+
+    public class TBDragEventArgs : EventArgs
+    {
+        //<summary>Mouse cursor position over the desktop when the dragging started.</summary>
+        private Point MousePosition;
+
+        public TBDragEventArgs(Point pos)
+        {
+            MousePosition = pos;
+        }
+        public Point GetInfo()
+        {
+            return MousePosition;
+        }
+    } 
+    #endregion
 }
