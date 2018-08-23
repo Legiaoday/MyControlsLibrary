@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
 using System.Windows.Threading;
@@ -26,6 +17,7 @@ namespace MyControlsLibrary
         private Rectangle square5;
         private Thread loadingThread;
         private DispatcherTimer timer;
+        DispatcherTimer tempTimer;
         private double opacitySub1 = 20;
         private double opacitySub2 = 40;
         private double opacitySub3 = 60;
@@ -114,12 +106,25 @@ namespace MyControlsLibrary
             timer.Tick += new EventHandler(timer_Tick);
         }
 
-        ///<summary>Starts playing the animation.</summary>
+        ///<summary>Starts playing the animation for an indefinite amount of time.</summary>
         public void StartAnimation()
         {
             loadingThread = new Thread(loadingThreadWork);
             loadingThread.IsBackground = true;
             loadingThread.Start();
+        }
+
+        ///<summary>Starts playing the animation and then stops after a certain amount of time in milliseconds.</summary>
+        public void StartAnimation(double timeSpan)
+        {
+            loadingThread = new Thread(loadingThreadWork);
+            loadingThread.IsBackground = true;
+            loadingThread.Start();
+
+            tempTimer = new DispatcherTimer();
+            tempTimer.Interval = TimeSpan.FromMilliseconds(timeSpan);
+            tempTimer.Tick += new EventHandler(tempTimer_Tick);
+            tempTimer.Start();
         }
 
         private void loadingThreadWork()
@@ -147,6 +152,15 @@ namespace MyControlsLibrary
             opacitySub5 = 100;
         }
 
+        ///<summary>Stops playing the animation after a certain amount of time in milliseconds.</summary>
+        public void StopAnimation(double timeSpan)
+        {
+            tempTimer = new DispatcherTimer();
+            tempTimer.Interval = TimeSpan.FromMilliseconds(timeSpan);
+            tempTimer.Tick += new EventHandler(tempTimer_Tick);
+            tempTimer.Start();
+        }
+
         void timer_Tick(object sender, EventArgs e)
         {
             square1.Fill = new SolidColorBrush() { Color = Colors.AliceBlue, Opacity = opacitySub1 / 100 };
@@ -160,6 +174,12 @@ namespace MyControlsLibrary
             opacitySub3 = (opacitySub3 > 10) ? opacitySub3 -= 10 : opacitySub3 = 100;
             opacitySub4 = (opacitySub4 > 10) ? opacitySub4 -= 10 : opacitySub4 = 100;
             opacitySub5 = (opacitySub5 > 10) ? opacitySub5 -= 10 : opacitySub5 = 100;
+        }
+
+        void tempTimer_Tick(object sender, EventArgs e)
+        {
+            tempTimer.Stop();
+            StopAnimation();
         }
     }
 }

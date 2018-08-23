@@ -19,10 +19,16 @@
             <summary>Creates a new loading control.</summary>
         </member>
         <member name="M:MyControlsLibrary.CustomLoading.StartAnimation">
-            <summary>Starts playing the animation.</summary>
+            <summary>Starts playing the animation for an indefinite amount of time.</summary>
+        </member>
+        <member name="M:MyControlsLibrary.CustomLoading.StartAnimation(System.Double)">
+            <summary>Starts playing the animation and then stops after a certain amount of time in milliseconds.</summary>
         </member>
         <member name="M:MyControlsLibrary.CustomLoading.StopAnimation">
             <summary>Stops playing the animation.</summary>
+        </member>
+        <member name="M:MyControlsLibrary.CustomLoading.StopAnimation(System.Double)">
+            <summary>Stops playing the animation after a certain amount of time in milliseconds.</summary>
         </member>
         <member name="M:MyControlsLibrary.CustomLoading.InitializeComponent">
             <summary>
