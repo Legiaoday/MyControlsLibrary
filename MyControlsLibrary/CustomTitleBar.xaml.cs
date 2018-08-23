@@ -579,12 +579,14 @@ namespace MyControlsLibrary
         }
 
         private DragMode windowDragMode = DragMode.Both;
+        ///<summary>Sets in which states the window can be dragged.</summary>
         public DragMode WindowDragMode
         {
             get { return windowDragMode; }
             set { windowDragMode = value; setCursor(); }
         }
 
+        ///<summary>States in which the window can be dragged.</summary>
         public enum DragMode
         {
             ///<summary>The window cannot be dragged at all.</summary>
