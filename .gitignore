@@ -9,3 +9,6 @@
 *.pdb
 /TitleBarDebugApp/bin
 /TitleBarDebugApp/obj
+/LoadingDebugApp/bin/Debug
+/LoadingDebugApp/bin/Release/LoadingDebugApp.exe.config
+/LoadingDebugApp/obj
