@@ -33,6 +33,18 @@ namespace MyControlsLibrary
         private double opacitySub5 = 100;
         ///<summary>Indicates whether the animation is playing or not.</summary>
         public bool IsPlayingAnimation { get; private set; } = false;//read only for anyone outside of this class
+        private double animationSpeed = 100;
+        ///<summary>Speed which the animation plays. Default value = 100ms.</summary>
+        public double AnimationSpeed
+        {
+            get { return animationSpeed; }
+
+            set
+            {
+                animationSpeed = value;
+                timer.Interval = TimeSpan.FromMilliseconds(animationSpeed);
+            }
+        }
 
         ///<summary>Creates a new loading control.</summary>
         public CustomLoading()
@@ -98,7 +110,7 @@ namespace MyControlsLibrary
             mainGrid.Children.Add(square5);
 
             timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(100);
+            timer.Interval = TimeSpan.FromMilliseconds(animationSpeed);
             timer.Tick += new EventHandler(timer_Tick);
         }
 

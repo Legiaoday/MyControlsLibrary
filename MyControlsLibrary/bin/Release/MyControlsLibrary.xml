@@ -12,6 +12,9 @@
         <member name="P:MyControlsLibrary.CustomLoading.IsPlayingAnimation">
             <summary>Indicates whether the animation is playing or not.</summary>
         </member>
+        <member name="P:MyControlsLibrary.CustomLoading.AnimationSpeed">
+            <summary>Speed which the animation plays. Default value = 100ms.</summary>
+        </member>
         <member name="M:MyControlsLibrary.CustomLoading.#ctor">
             <summary>Creates a new loading control.</summary>
         </member>
