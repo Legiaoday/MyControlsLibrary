@@ -30,6 +30,12 @@
         <member name="M:MyControlsLibrary.CustomLoading.StopAnimation(System.Double)">
             <summary>Stops playing the animation after a certain amount of time in milliseconds.</summary>
         </member>
+        <member name="E:MyControlsLibrary.CustomLoading.CLAnimationStarted">
+            <summary>Occurs when the animation starts.</summary>
+        </member>
+        <member name="E:MyControlsLibrary.CustomLoading.CLAnimationStopped">
+            <summary>Occurs when the animation stops.</summary>
+        </member>
         <member name="M:MyControlsLibrary.CustomLoading.InitializeComponent">
             <summary>
             InitializeComponent
@@ -151,10 +157,19 @@
         <member name="M:MyControlsLibrary.CustomTitleBar.RECT.op_Inequality(MyControlsLibrary.CustomTitleBar.RECT,MyControlsLibrary.CustomTitleBar.RECT)">
             <summary> Determine if 2 RECT are different(deep compare)</summary>
         </member>
+        <member name="E:MyControlsLibrary.CustomTitleBar.TBDragStart">
+            <summary>Occurs when the user starts dragging the title bar.</summary>
+        </member>
+        <member name="E:MyControlsLibrary.CustomTitleBar.TBDragEnd">
+            <summary>Occurs when the user stops dragging the title bar.</summary>
+        </member>
         <member name="M:MyControlsLibrary.CustomTitleBar.InitializeComponent">
             <summary>
             InitializeComponent
             </summary>
+        </member>
+        <member name="F:MyControlsLibrary.TBDragEventArgs.MousePosition">
+            <summary>Mouse cursor position over the desktop when the event is called.</summary>
         </member>
     </members>
 </doc>

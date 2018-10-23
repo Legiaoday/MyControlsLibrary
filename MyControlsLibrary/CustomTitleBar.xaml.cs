@@ -790,8 +790,10 @@ namespace MyControlsLibrary
         internal static extern IntPtr MonitorFromWindow(IntPtr handle, int flags);
         #endregion
 
-        #region Drag start event
+        #region Drag start/end events
+        ///<summary>Occurs when the user starts dragging the title bar.</summary>
         public event TBDragEventHandler TBDragStart;//event name that will be called by the programs that use this library
+        ///<summary>Occurs when the user stops dragging the title bar.</summary>
         public event TBDragEventHandler TBDragEnd;//event name that will be called by the programs that use this library
 
         private void doDragStartEvent()
@@ -818,19 +820,20 @@ namespace MyControlsLibrary
         #endregion
     }
 
-    #region Drag start event class, handle and delegate
+    #region Drag start/stop event class, handle and delegate
     //these need to be out of the escope of the main class
     public delegate void TBDragEventHandler(object source, TBDragEventArgs e);
 
     public class TBDragEventArgs : EventArgs
     {
-        //<summary>Mouse cursor position over the desktop when the event is called.</summary>
+        ///<summary>Mouse cursor position over the desktop when the event is called.</summary>
         private Point MousePosition;
 
         public TBDragEventArgs(Point pos)
         {
             MousePosition = pos;
         }
+
         public Point GetPoint()
         {
             return MousePosition;

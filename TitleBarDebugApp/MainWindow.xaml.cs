@@ -34,6 +34,8 @@ namespace TitleBarDebugApp
             titleBar.FullScreenMode = false;
             titleBar.TextColor = Brushes.Black;
             //titleBar.SetTextColorHex("#FF4bff14");//00 = black, ff = white
+            titleBar.TBDragStart += new TBDragEventHandler(titleBar_DragStart);
+            titleBar.TBDragEnd += new TBDragEventHandler(titleBar_DragEnd);
 
             //parent window configurations
             workAreGrid.Margin = new Thickness(0, titleBar.Height, 0,0);
@@ -42,6 +44,16 @@ namespace TitleBarDebugApp
         private void Button_Click(object sender, RoutedEventArgs e)
         {
            
+        }
+
+        private void titleBar_DragStart(object sender,TBDragEventArgs e)
+        {
+
+        }
+
+        private void titleBar_DragEnd(object sender, TBDragEventArgs e)
+        {
+
         }
     }
 }

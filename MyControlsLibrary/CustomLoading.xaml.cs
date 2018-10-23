@@ -109,6 +109,10 @@ namespace MyControlsLibrary
         ///<summary>Starts playing the animation for an indefinite amount of time.</summary>
         public void StartAnimation()
         {
+            //To make sure we only trigger the event if a handler is present
+            //we check the event to make sure it's not null.
+            CLAnimationStarted?.Invoke(this, new CLAnimationEventArgs());
+
             loadingThread = new Thread(loadingThreadWork);
             loadingThread.IsBackground = true;
             loadingThread.Start();
@@ -117,13 +121,17 @@ namespace MyControlsLibrary
         ///<summary>Starts playing the animation and then stops after a certain amount of time in milliseconds.</summary>
         public void StartAnimation(double timeSpan)
         {
+            //To make sure we only trigger the event if a handler is present
+            //we check the event to make sure it's not null.
+            CLAnimationStarted?.Invoke(this, new CLAnimationEventArgs());
+
             loadingThread = new Thread(loadingThreadWork);
             loadingThread.IsBackground = true;
             loadingThread.Start();
 
             tempTimer = new DispatcherTimer();
             tempTimer.Interval = TimeSpan.FromMilliseconds(timeSpan);
-            tempTimer.Tick += new EventHandler(tempTimer_Tick);
+            tempTimer.Tick += new EventHandler(stopTimer_Tick);
             tempTimer.Start();
         }
 
@@ -150,6 +158,10 @@ namespace MyControlsLibrary
             opacitySub3 = 60;
             opacitySub4 = 80;
             opacitySub5 = 100;
+
+            //To make sure we only trigger the event if a handler is present
+            //we check the event to make sure it's not null.
+            CLAnimationStopped?.Invoke(this, new CLAnimationEventArgs());
         }
 
         ///<summary>Stops playing the animation after a certain amount of time in milliseconds.</summary>
@@ -157,11 +169,11 @@ namespace MyControlsLibrary
         {
             tempTimer = new DispatcherTimer();
             tempTimer.Interval = TimeSpan.FromMilliseconds(timeSpan);
-            tempTimer.Tick += new EventHandler(tempTimer_Tick);
+            tempTimer.Tick += new EventHandler(stopTimer_Tick);
             tempTimer.Start();
         }
 
-        void timer_Tick(object sender, EventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
             square1.Fill = new SolidColorBrush() { Color = Colors.AliceBlue, Opacity = opacitySub1 / 100 };
             square2.Fill = new SolidColorBrush() { Color = Colors.AliceBlue, Opacity = opacitySub2 / 100 };
@@ -176,10 +188,33 @@ namespace MyControlsLibrary
             opacitySub5 = (opacitySub5 > 10) ? opacitySub5 -= 10 : opacitySub5 = 100;
         }
 
-        void tempTimer_Tick(object sender, EventArgs e)
+        private void stopTimer_Tick(object sender, EventArgs e)
         {
             tempTimer.Stop();
             StopAnimation();
+
+            //To make sure we only trigger the event if a handler is present
+            //we check the event to make sure it's not null.
+            CLAnimationStopped?.Invoke(this, new CLAnimationEventArgs());
         }
+
+        #region Animation started/ended events
+        ///<summary>Occurs when the animation starts.</summary>
+        public event CLAnimationEventHandler CLAnimationStarted;//event name that will be called by the programs that use this library
+        ///<summary>Occurs when the animation stops.</summary>
+        public event CLAnimationEventHandler CLAnimationStopped;//event name that will be called by the programs that use this library
+        #endregion
     }
+
+    #region Animation started/ended event class, handle and delegate
+    //these need to be out of the escope of the main class
+    public delegate void CLAnimationEventHandler(object source, CLAnimationEventArgs e);
+
+    public class CLAnimationEventArgs : EventArgs
+    {
+        public CLAnimationEventArgs()
+        {
+        }
+    } 
+    #endregion
 }

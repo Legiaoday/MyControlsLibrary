@@ -13,6 +13,8 @@ namespace LoadingDebugApp
             loading = new CustomLoading();
             mainGrid.Children.Add(loading);
             loading.AnimationSpeed = 100;
+            loading.CLAnimationStopped += new CLAnimationEventHandler(loadAnim_Stop);
+            loading.CLAnimationStarted += new CLAnimationEventHandler(loadAnim_Start);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -20,11 +22,23 @@ namespace LoadingDebugApp
             if (!loading.IsPlayingAnimation)
             {
                 loading.StartAnimation();
+                //loading.StartAnimation(2000);
             }
             else
             {
                 loading.StopAnimation(1000);
+                //loading.StopAnimation();
             }
+        }
+
+        private void loadAnim_Stop(object sender, CLAnimationEventArgs e)
+        {
+
+        }
+
+        private void loadAnim_Start(object sender, CLAnimationEventArgs e)
+        {
+
         }
     }
 }
