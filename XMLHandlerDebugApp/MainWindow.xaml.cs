@@ -39,14 +39,8 @@ namespace XMLHandlerDebugApp
                             this.Height = double.Parse(item.Value);
                             break;
                         case "WindowState":
-                            if(item.Value == "Maximized")
-                            {
-                                this.WindowState = WindowState.Maximized;
-                            }
-                            else
-                            {
-                                this.WindowState = WindowState.Normal;
-                            }
+                            if(item.Value == "Maximized") this.WindowState = WindowState.Maximized;
+                            else this.WindowState = WindowState.Normal;
                             break;
                     }
                 }
