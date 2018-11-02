@@ -67,17 +67,17 @@ namespace MiscFunctionsLibrary
                     XMLSettingItem item = new XMLSettingItem();
                     item.Name = node2.Name;
                     item.Value = node2.InnerText;
-                    settings.Items.Add(item);                    
+                    settings.Items.Add(item);
                 }
 
                 myXmlDocument.Save(fileName);
                 return settings;
             }
             catch (FileNotFoundException ex)
-            { 
+            {
             }
             catch (DirectoryNotFoundException)
-            { 
+            {
             }
             catch (Exception ex)
             {

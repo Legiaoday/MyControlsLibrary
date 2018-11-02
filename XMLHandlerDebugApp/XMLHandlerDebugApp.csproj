@@ -34,9 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MiscFunctionsLibrary">
-      <HintPath>..\MiscFunctionsLibrary\bin\Debug\MiscFunctionsLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -95,6 +92,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MiscFunctionsLibrary\MiscFunctionsLibrary.csproj">
+      <Project>{0c219ed9-862f-4fd3-8889-a02314fb2da5}</Project>
+      <Name>MiscFunctionsLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
