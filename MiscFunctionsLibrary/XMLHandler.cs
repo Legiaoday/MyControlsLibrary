@@ -4,7 +4,7 @@ using System.IO;
 using System;
 using System.Collections.Generic;
 
-namespace MyControlsLibrary
+namespace MiscFunctionsLibrary
 {
     public struct XMLSettingItem
     {
@@ -20,7 +20,6 @@ namespace MyControlsLibrary
         {
             Items = new List<XMLSettingItem>();
         }
-
         public void AddNewItem (string name, string value)
         {
             XMLSettingItem item = new XMLSettingItem();
@@ -34,6 +33,7 @@ namespace MyControlsLibrary
     {
         public static void WriteConfigXML(string fileName, XMLSettings settings)
         {
+            
             XmlTextWriter writer = new XmlTextWriter(fileName, Encoding.UTF8);
             writer.WriteStartDocument(true);
             writer.Formatting = Formatting.Indented;

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadingDebugApp", "LoadingD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiscFunctionsLibrary", "MiscFunctionsLibrary\MiscFunctionsLibrary.csproj", "{0C219ED9-862F-4FD3-8889-A02314FB2DA5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XMLHandlerDebugApp", "XMLHandlerDebugApp\XMLHandlerDebugApp.csproj", "{8F177472-1902-4304-8E7A-EFF1689C4702}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{0C219ED9-862F-4FD3-8889-A02314FB2DA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C219ED9-862F-4FD3-8889-A02314FB2DA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C219ED9-862F-4FD3-8889-A02314FB2DA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F177472-1902-4304-8E7A-EFF1689C4702}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F177472-1902-4304-8E7A-EFF1689C4702}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F177472-1902-4304-8E7A-EFF1689C4702}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F177472-1902-4304-8E7A-EFF1689C4702}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
