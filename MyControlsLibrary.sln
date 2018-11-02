@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TitleBarDebugApp", "TitleBa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadingDebugApp", "LoadingDebugApp\LoadingDebugApp.csproj", "{552C5A7A-0EFA-4563-BB96-FB2A7B6AB748}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiscFunctionsLibrary", "MiscFunctionsLibrary\MiscFunctionsLibrary.csproj", "{0C219ED9-862F-4FD3-8889-A02314FB2DA5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{552C5A7A-0EFA-4563-BB96-FB2A7B6AB748}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{552C5A7A-0EFA-4563-BB96-FB2A7B6AB748}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{552C5A7A-0EFA-4563-BB96-FB2A7B6AB748}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C219ED9-862F-4FD3-8889-A02314FB2DA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C219ED9-862F-4FD3-8889-A02314FB2DA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C219ED9-862F-4FD3-8889-A02314FB2DA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C219ED9-862F-4FD3-8889-A02314FB2DA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

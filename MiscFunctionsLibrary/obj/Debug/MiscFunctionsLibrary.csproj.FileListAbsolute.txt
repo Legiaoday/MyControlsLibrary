@@ -1,0 +1,6 @@
+E:\Documents\GitHub\MyControlsLibrary\MiscFunctionsLibrary\bin\Debug\MiscFunctionsLibrary.dll
+E:\Documents\GitHub\MyControlsLibrary\MiscFunctionsLibrary\bin\Debug\MiscFunctionsLibrary.pdb
+E:\Documents\GitHub\MyControlsLibrary\MiscFunctionsLibrary\obj\Debug\MiscFunctionsLibrary.csprojAssemblyReference.cache
+E:\Documents\GitHub\MyControlsLibrary\MiscFunctionsLibrary\obj\Debug\MiscFunctionsLibrary.csproj.CoreCompileInputs.cache
+E:\Documents\GitHub\MyControlsLibrary\MiscFunctionsLibrary\obj\Debug\MiscFunctionsLibrary.dll
+E:\Documents\GitHub\MyControlsLibrary\MiscFunctionsLibrary\obj\Debug\MiscFunctionsLibrary.pdb
