@@ -12,5 +12,7 @@
 /LoadingDebugApp/bin/Debug
 /LoadingDebugApp/bin/Release/LoadingDebugApp.exe.config
 /LoadingDebugApp/obj
+/MiscFunctionsLibrary/obj
+/MiscFunctionsLibrary/bin/Debug
 /XMLHandlerDebugApp/bin/Debug
-/XMLHandlerDebugApp/obj/Debug
+/XMLHandlerDebugApp/obj
