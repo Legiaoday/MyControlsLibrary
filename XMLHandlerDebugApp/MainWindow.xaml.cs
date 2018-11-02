@@ -42,7 +42,6 @@ namespace XMLHandlerDebugApp
                             if(item.Value == "Maximized") this.WindowState = WindowState.Maximized;
                             else this.WindowState = WindowState.Normal;
                             break;
-
                     }
                 }
             }
