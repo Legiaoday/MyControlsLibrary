@@ -5,6 +5,8 @@ namespace XMLHandlerDebugApp
 {
     public partial class MainWindow : Window
     {
+        XMLSettings settings;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -18,7 +20,7 @@ namespace XMLHandlerDebugApp
 
         private void LoadXML()
         {
-            XMLSettings settings = XMLHandler.LoadConfigXML("seriesConfig.xml");
+            settings = XMLHandler.LoadConfigXML("seriesConfig.xml");
 
             if (settings != null)
             {
@@ -57,6 +59,11 @@ namespace XMLHandlerDebugApp
             settings.AddNewItem("WindowState", this.WindowState.ToString());
 
             XMLHandler.WriteConfigXML("seriesConfig.xml", settings);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(settings.GetItemValue("WindowYPosition"));
         }
     }
 }

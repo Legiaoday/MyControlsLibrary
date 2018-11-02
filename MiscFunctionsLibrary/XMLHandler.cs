@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 namespace MiscFunctionsLibrary
 {
+    ///<summary>Holds information about a single setting.</summary>
     public struct XMLSettingItem
     {
         public string Name { get; set; }
@@ -14,23 +15,44 @@ namespace MiscFunctionsLibrary
 
     public class XMLSettings
     {
+        ///<summary>List of setting items.</summary>
         public List<XMLSettingItem> Items { get; set; }
 
+        ///<summary>Creates a new XMLSettings object.</summary>
         public XMLSettings()
         {
             Items = new List<XMLSettingItem>();
         }
-        public void AddNewItem (string name, string value)
+
+        ///<summary>Adds a new item to the setting items list.</summary>
+        public void AddNewItem(string name, string value)
         {
             XMLSettingItem item = new XMLSettingItem();
             item.Name = name;
             item.Value = value;
             this.Items.Add(item);
         }
+
+        ///<summary>Returns the value of a setting based on the first occurrence of the item name.</summary>
+        public string GetItemValue(string itemName)
+        {
+            string value = null;
+
+            foreach (XMLSettingItem item in this.Items)
+            {
+                if(item.Name == itemName)
+                {
+                    return item.Value;
+                }
+            }
+
+            return value;
+        }
     }
 
     public class XMLHandler
     {
+        ///<summary>Writes a XMLSettings object to a file overwriting any existing file.</summary>
         public static void WriteConfigXML(string fileName, XMLSettings settings)
         {
             
@@ -52,6 +74,7 @@ namespace MiscFunctionsLibrary
             writer.Close();
         }
 
+        ///<summary>Reads a XML file and loads its contents into a XMLSettings object.</summary>
         public static XMLSettings LoadConfigXML(string fileName)
         {
             try
