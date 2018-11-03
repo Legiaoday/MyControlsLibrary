@@ -75,10 +75,8 @@ namespace XMLHandlerDebugApp
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            //MessageBox.Show("WindowYPosition old value: " + settings.GetItemValue("WindowYPosition"));
-            //XMLSettingItem item = settings.GetItemRef("WindowYPosition");
-            //item.Value = (double.Parse(item.Value) + 10).ToString();
-            //MessageBox.Show("WindowYPosition new value: " + settings.GetItemValue("WindowYPosition"));
+            bool isRemoved = settings.RemoveItem("WindowYPosition");
+            if (isRemoved) MessageBox.Show("WindowYPosition remove!");
         }
     }
 }

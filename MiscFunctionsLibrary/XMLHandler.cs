@@ -60,6 +60,21 @@ namespace MiscFunctionsLibrary
 
             return -1;
         }
+
+        ///<summary>Removes the an item based on the first occurrence of the item name. Returns true if the is successfully removed</summary>
+        public bool RemoveItem(string itemName)
+        {
+            for (int i = 0; i < this.Items.Count; i++)
+            {
+                if (this.Items[i].Name == itemName)
+                {
+                    this.Items.RemoveAt(i);
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 
     public class XMLHandler
