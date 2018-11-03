@@ -63,10 +63,17 @@ namespace XMLHandlerDebugApp
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(settings.GetItemValue("WindowYPosition"));
+            string yPos = settings.GetItemValue("WindowYPosition");
+            if(yPos != null) MessageBox.Show(yPos);
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            int yIndex = settings.GetItemIndex("WindowYPosition");
+            if (yIndex != -1) MessageBox.Show(yIndex.ToString());
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             //MessageBox.Show("WindowYPosition old value: " + settings.GetItemValue("WindowYPosition"));
             //XMLSettingItem item = settings.GetItemRef("WindowYPosition");

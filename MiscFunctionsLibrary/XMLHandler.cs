@@ -36,8 +36,6 @@ namespace MiscFunctionsLibrary
         ///<summary>Returns the value of a setting based on the first occurrence of the item name.</summary>
         public string GetItemValue(string itemName)
         {
-            string value = null;
-
             foreach (XMLSettingItem item in this.Items)
             {
                 if(item.Name == itemName)
@@ -46,7 +44,21 @@ namespace MiscFunctionsLibrary
                 }
             }
 
-            return value;
+            return null;
+        }
+
+        ///<summary>Returns the index of a setting based on the first occurrence of the item name.</summary>
+        public int GetItemIndex(string itemName)
+        {
+            for (int i = 0; i < this.Items.Count; i++)
+            {
+                if (this.Items[i].Name == itemName)
+                {
+                    return i;
+                }
+            }
+
+            return -1;
         }
     }
 
