@@ -5,7 +5,7 @@ namespace XMLHandlerDebugApp
 {
     public partial class MainWindow : Window
     {
-        XMLSettings settings;
+        XMLSettings settings = new XMLSettings();
 
         public MainWindow()
         {
@@ -20,7 +20,7 @@ namespace XMLHandlerDebugApp
 
         private void LoadXML()
         {
-            settings = XMLHandler.LoadConfigXML("seriesConfig.xml");
+            settings.LoadConfigXML("seriesConfig.xml");
 
             foreach(XMLSettingItem item in settings.Items)
             {
@@ -56,7 +56,7 @@ namespace XMLHandlerDebugApp
             settings.UpdateItem("WindowYSize", this.Height.ToString(), true);
             settings.UpdateItem("WindowState", this.WindowState.ToString(), true);
 
-            XMLHandler.WriteConfigXML("seriesConfig.xml", settings);
+            settings.WriteConfigXML("seriesConfig.xml");
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -79,7 +79,14 @@ namespace XMLHandlerDebugApp
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            
+            XMLSettingItem item = settings.GetItem("WindowYPosition");
+
+            if (item != null)
+            {
+                MessageBox.Show("Original item value: " + item.Value);
+                item.Value = (System.Convert.ToDouble(item.Value) + 157).ToString();
+                MessageBox.Show("New item value: " + settings.GetItemValue("WindowYPosition"));
+            }
         }
     }
 }

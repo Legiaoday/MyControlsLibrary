@@ -19,7 +19,7 @@ namespace MiscFunctionsLibrary
         }
     }
 
-    ///<summary>Class managing a list of setting items.</summary>
+    ///<summary>Class for managing a list of setting items.</summary>
     public class XMLSettings
     {
         ///<summary>List of setting items.</summary>
@@ -29,6 +29,62 @@ namespace MiscFunctionsLibrary
         public XMLSettings()
         {
             Items = new List<XMLSettingItem>();
+        }
+
+        ///<summary>Writes a XMLSettings object to a file overwriting any existing file.</summary>
+        public void WriteConfigXML(string fileName)
+        {
+            XmlTextWriter writer = new XmlTextWriter(fileName, Encoding.UTF8);
+            writer.WriteStartDocument(true);
+            writer.Formatting = Formatting.Indented;
+            writer.Indentation = 2;
+            writer.WriteStartElement("Config");
+
+            foreach (XMLSettingItem si in this.Items)
+            {
+                writer.WriteStartElement(si.Name);
+                writer.WriteString(si.Value);
+                writer.WriteEndElement();
+            }
+
+            writer.WriteEndElement();
+            writer.WriteEndDocument();
+            writer.Close();
+        }
+
+        ///<summary>Reads a XML settings file and loads its contents into Items.</summary>
+        public bool LoadConfigXML(string fileName)
+        {
+            try
+            {
+                XmlDocument myXmlDocument = new XmlDocument();
+                myXmlDocument.Load(fileName);
+                XmlNode node;
+                node = myXmlDocument.DocumentElement;
+
+                foreach (XmlNode node2 in node.ChildNodes)//config node
+                {
+                    XMLSettingItem item = new XMLSettingItem();
+                    item.Name = node2.Name;
+                    item.Value = node2.InnerText;
+                    this.Items.Add(item);
+                }
+
+                myXmlDocument.Save(fileName);
+                return true;
+            }
+            catch (FileNotFoundException ex)
+            {
+            }
+            catch (DirectoryNotFoundException)
+            {
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return false;
         }
 
         ///<summary>Adds a new item to the setting items list.</summary>
@@ -68,7 +124,7 @@ namespace MiscFunctionsLibrary
             return -1;
         }
 
-        ///<summary>Removes the an item based on the first occurrence of the item name. Returns true if the is successfully removed.</summary>
+        ///<summary>Removes an item based on the first occurrence of the item name. Returns true if the is successfully removed.</summary>
         public bool RemoveItem(string itemName)
         {
             for (int i = 0; i < this.Items.Count; i++)
@@ -104,67 +160,19 @@ namespace MiscFunctionsLibrary
 
             return false;
         }
-    }
 
-    public class XMLHandler
-    {
-        ///<summary>Writes a XMLSettings object to a file overwriting any existing file.</summary>
-        public static void WriteConfigXML(string fileName, XMLSettings settings)
+        ///<summary>Returns a reference of an item based on the first occurrence of the item name. Returns null if no item with that name is found.</summary>
+        public XMLSettingItem GetItem(string itemName)
         {
-            
-            XmlTextWriter writer = new XmlTextWriter(fileName, Encoding.UTF8);
-            writer.WriteStartDocument(true);
-            writer.Formatting = Formatting.Indented;
-            writer.Indentation = 2;
-            writer.WriteStartElement("Config");
-
-            foreach(XMLSettingItem si in settings.Items)
+            for (int i = 0; i < this.Items.Count; i++)
             {
-                writer.WriteStartElement(si.Name);
-                writer.WriteString(si.Value);
-                writer.WriteEndElement();
-            }
-
-            writer.WriteEndElement();
-            writer.WriteEndDocument();
-            writer.Close();
-        }
-
-        ///<summary>Reads a XML settings file and loads its contents into a XMLSettings object.</summary>
-        public static XMLSettings LoadConfigXML(string fileName)
-        {
-            XMLSettings settings = new XMLSettings();
-
-            try
-            {
-                XmlDocument myXmlDocument = new XmlDocument();
-                myXmlDocument.Load(fileName);
-                XmlNode node;
-                node = myXmlDocument.DocumentElement;
-
-                foreach (XmlNode node2 in node.ChildNodes)//config node
+                if (this.Items[i].Name == itemName)
                 {
-                    XMLSettingItem item = new XMLSettingItem();
-                    item.Name = node2.Name;
-                    item.Value = node2.InnerText;
-                    settings.Items.Add(item);
+                    return this.Items[i];
                 }
-
-                myXmlDocument.Save(fileName);
-                return settings;
-            }
-            catch (FileNotFoundException ex)
-            {
-            }
-            catch (DirectoryNotFoundException)
-            {
-            }
-            catch (Exception ex)
-            {
-                throw;
             }
 
-            return settings;
+            return null;
         }
     }
 }
