@@ -3,5 +3,5 @@
 ################################################################################
 
 *.pdb
-/MiscFunctionsLibrary/obj
-/MiscFunctionsLibrary/bin/Debug
+/obj
+/bin/Debug

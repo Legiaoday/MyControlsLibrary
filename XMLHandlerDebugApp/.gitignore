@@ -3,5 +3,5 @@
 ################################################################################
 
 *.pdb
-/XMLHandlerDebugApp/obj
-/XMLHandlerDebugApp/bin/Debug
+/obj
+/bin/Debug
