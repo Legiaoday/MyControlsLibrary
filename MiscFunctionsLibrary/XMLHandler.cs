@@ -73,7 +73,7 @@ namespace MiscFunctionsLibrary
                 myXmlDocument.Save(fileName);
                 return true;
             }
-            catch (FileNotFoundException ex)
+            catch (FileNotFoundException e)
             {
             }
             catch (DirectoryNotFoundException)
