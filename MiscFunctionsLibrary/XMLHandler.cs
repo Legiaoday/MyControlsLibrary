@@ -161,7 +161,7 @@ namespace MiscFunctionsLibrary
             return false;
         }
 
-        ///<summary>Returns a reference of an item based on the first occurrence of the item name. Returns null if no item with that name is found.</summary>
+        ///<summary>Returns an item (by reference because it's a class) based on the first occurrence of the item name. Returns null if no item with that name is found.</summary>
         public XMLSettingItem GetItem(string itemName)
         {
             for (int i = 0; i < this.Items.Count; i++)
