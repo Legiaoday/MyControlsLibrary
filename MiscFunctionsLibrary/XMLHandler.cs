@@ -7,12 +7,19 @@ using System.Collections.Generic;
 namespace MiscFunctionsLibrary
 {
     ///<summary>Holds information about a single setting.</summary>
-    public struct XMLSettingItem
+    public class XMLSettingItem
     {
         public string Name { get; set; }
         public string Value { get; set; }
+
+        public XMLSettingItem()
+        {
+            Name = null;
+            Value = null;
+        }
     }
 
+    ///<summary>Class managing a list of setting items.</summary>
     public class XMLSettings
     {
         ///<summary>List of setting items.</summary>
@@ -25,15 +32,15 @@ namespace MiscFunctionsLibrary
         }
 
         ///<summary>Adds a new item to the setting items list.</summary>
-        public void AddNewItem(string name, string value)
+        public void AddNewItem(string itemName, string value)
         {
             XMLSettingItem item = new XMLSettingItem();
-            item.Name = name;
+            item.Name = itemName;
             item.Value = value;
             this.Items.Add(item);
         }
 
-        ///<summary>Returns the value of a setting based on the first occurrence of the item name.</summary>
+        ///<summary>Returns the value of a setting based on the first occurrence of the item name. If no item is found with that name it returns null.</summary>
         public string GetItemValue(string itemName)
         {
             foreach (XMLSettingItem item in this.Items)
@@ -47,7 +54,7 @@ namespace MiscFunctionsLibrary
             return null;
         }
 
-        ///<summary>Returns the index of a setting based on the first occurrence of the item name.</summary>
+        ///<summary>Returns the index of a setting based on the first occurrence of the item name. If no item is found with that name it returns -1.</summary>
         public int GetItemIndex(string itemName)
         {
             for (int i = 0; i < this.Items.Count; i++)
@@ -61,7 +68,7 @@ namespace MiscFunctionsLibrary
             return -1;
         }
 
-        ///<summary>Removes the an item based on the first occurrence of the item name. Returns true if the is successfully removed</summary>
+        ///<summary>Removes the an item based on the first occurrence of the item name. Returns true if the is successfully removed.</summary>
         public bool RemoveItem(string itemName)
         {
             for (int i = 0; i < this.Items.Count; i++)
@@ -71,6 +78,28 @@ namespace MiscFunctionsLibrary
                     this.Items.RemoveAt(i);
                     return true;
                 }
+            }
+
+            return false;
+        }
+
+        ///<summary>Updates an item based on the first occurrence of the item name. Returns true if the is successfully updated or created.
+        ///If createIfNotExist is true and no item with the name passed is found, it will add a new item to the setting list.</summary>
+        public bool UpdateItem(string itemName, string value, bool createIfNotExist)
+        {
+            for (int i = 0; i < this.Items.Count; i++)
+            {
+                if (this.Items[i].Name == itemName)
+                {
+                    this.Items[i].Value = value;
+                    return true;
+                }
+            }
+
+            if (createIfNotExist)
+            {
+                AddNewItem(itemName, value);
+                return true;
             }
 
             return false;
@@ -101,16 +130,17 @@ namespace MiscFunctionsLibrary
             writer.Close();
         }
 
-        ///<summary>Reads a XML file and loads its contents into a XMLSettings object.</summary>
+        ///<summary>Reads a XML settings file and loads its contents into a XMLSettings object.</summary>
         public static XMLSettings LoadConfigXML(string fileName)
         {
+            XMLSettings settings = new XMLSettings();
+
             try
             {
                 XmlDocument myXmlDocument = new XmlDocument();
                 myXmlDocument.Load(fileName);
                 XmlNode node;
                 node = myXmlDocument.DocumentElement;
-                XMLSettings settings = new XMLSettings();
 
                 foreach (XmlNode node2 in node.ChildNodes)//config node
                 {
@@ -134,7 +164,7 @@ namespace MiscFunctionsLibrary
                 throw;
             }
 
-            return null;
+            return settings;
         }
     }
 }

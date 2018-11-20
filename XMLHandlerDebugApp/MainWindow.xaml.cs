@@ -15,48 +15,46 @@ namespace XMLHandlerDebugApp
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            WriteXML();
+            SaveXML();
         }
 
         private void LoadXML()
         {
             settings = XMLHandler.LoadConfigXML("seriesConfig.xml");
 
-            if (settings != null)
+            foreach(XMLSettingItem item in settings.Items)
             {
-                foreach(XMLSettingItem item in settings.Items)
+                switch (item.Name)
                 {
-                    switch (item.Name)
-                    {
-                        case "WindowXPosition":
-                            this.Left = double.Parse(item.Value);
-                            break;
-                        case "WindowYPosition":
-                            this.Top = double.Parse(item.Value);
-                            break;
-                        case "WindowXSize":
-                            this.Width = double.Parse(item.Value);
-                            break;
-                        case "WindowYSize":
-                            this.Height = double.Parse(item.Value);
-                            break;
-                        case "WindowState":
-                            if(item.Value == "Maximized") this.WindowState = WindowState.Maximized;
-                            else this.WindowState = WindowState.Normal;
-                            break;
-                    }
+                    case "WindowXPosition":
+                        this.Left = double.Parse(item.Value);
+                        break;
+                    case "WindowYPosition":
+                        this.Top = double.Parse(item.Value);
+                        break;
+                    case "WindowXSize":
+                        this.Width = double.Parse(item.Value);
+                        break;
+                    case "WindowYSize":
+                        this.Height = double.Parse(item.Value);
+                        break;
+                    case "WindowState":
+                        if(item.Value == "Maximized")
+                            this.WindowState = WindowState.Maximized;
+                        else
+                            this.WindowState = WindowState.Normal;
+                        break;
                 }
             }
         }
 
-        private void WriteXML()
+        private void SaveXML()
         {
-            XMLSettings settings = new XMLSettings();
-            settings.AddNewItem("WindowXPosition", this.Left.ToString());
-            settings.AddNewItem("WindowYPosition", this.Top.ToString());
-            settings.AddNewItem("WindowXSize", this.Width.ToString());
-            settings.AddNewItem("WindowYSize", this.Height.ToString());
-            settings.AddNewItem("WindowState", this.WindowState.ToString());
+            settings.UpdateItem("WindowXPosition", this.Left.ToString(), true);
+            settings.UpdateItem("WindowYPosition", this.Top.ToString(), true);
+            settings.UpdateItem("WindowXSize", this.Width.ToString(), true);
+            settings.UpdateItem("WindowYSize", this.Height.ToString(), true);
+            settings.UpdateItem("WindowState", this.WindowState.ToString(), true);
 
             XMLHandler.WriteConfigXML("seriesConfig.xml", settings);
         }
@@ -76,7 +74,12 @@ namespace XMLHandlerDebugApp
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             bool isRemoved = settings.RemoveItem("WindowYPosition");
-            if (isRemoved) MessageBox.Show("WindowYPosition remove!");
+            if (isRemoved) MessageBox.Show("WindowYPosition removed!");
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
