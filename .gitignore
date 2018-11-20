@@ -2,11 +2,11 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
+*.pdb
 /.vs/MyControlsLibrary/v15/Server
 /.vs/MyControlsLibrary/DesignTimeBuild
 /MyControlsLibrary/obj
 /MyControlsLibrary/bin/Debug
-*.pdb
 /TitleBarDebugApp/bin
 /TitleBarDebugApp/obj
 /LoadingDebugApp/bin/Debug

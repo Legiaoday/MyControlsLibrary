@@ -85,7 +85,7 @@ namespace XMLHandlerDebugApp
             {
                 MessageBox.Show("Original item value: " + item.Value);
                 item.Value = (System.Convert.ToDouble(item.Value) + 157).ToString();
-                MessageBox.Show("New item value:" + settings.GetItemValue("WindowYPosition"));
+                MessageBox.Show("New item value: " + settings.GetItemValue("WindowYPosition"));
             }
         }
     }
