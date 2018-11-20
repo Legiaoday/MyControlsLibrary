@@ -3,6 +3,7 @@
 ################################################################################
 
 *.pdb
+*.suo
 /.vs/MyControlsLibrary/v15/Server
 /.vs/MyControlsLibrary/DesignTimeBuild
 /MyControlsLibrary/obj
