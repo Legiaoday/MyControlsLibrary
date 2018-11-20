@@ -15,3 +15,7 @@
 /MiscFunctionsLibrary/obj
 /XMLHandlerDebugApp/bin/Debug
 /XMLHandlerDebugApp/obj
+/XMLHandlerDebugApp/bin/Release/MiscFunctionsLibrary.pdb
+/XMLHandlerDebugApp/bin/Release/XMLHandlerDebugApp.exe.config
+/XMLHandlerDebugApp/bin/Release/XMLHandlerDebugApp.pdb
+/MiscFunctionsLibrary/bin/Release/MiscFunctionsLibrary.pdb
