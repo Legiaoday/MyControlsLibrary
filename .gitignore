@@ -11,3 +11,5 @@
 /LoadingDebugApp/bin/Debug
 /LoadingDebugApp/bin/Release/LoadingDebugApp.exe.config
 /LoadingDebugApp/obj
+/LoadingDebugApp/bin/Release
+/MyControlsLibrary/bin/Release/MyControlsLibrary.pdb
