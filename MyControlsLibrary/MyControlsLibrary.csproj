@@ -53,6 +53,9 @@
     <Compile Include="CustomTitleBar.xaml.cs">
       <DependentUpon>CustomTitleBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NumericUpDown.xaml.cs">
+      <DependentUpon>NumericUpDown.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +64,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomTitleBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NumericUpDown.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

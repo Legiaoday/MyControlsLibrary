@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TitleBarDebugApp", "TitleBa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadingDebugApp", "LoadingDebugApp\LoadingDebugApp.csproj", "{552C5A7A-0EFA-4563-BB96-FB2A7B6AB748}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumUpDownDebugApp", "NumUpDownDebugApp\NumUpDownDebugApp.csproj", "{F596CCCE-B10B-45A3-8AD9-DF6F022663EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{552C5A7A-0EFA-4563-BB96-FB2A7B6AB748}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{552C5A7A-0EFA-4563-BB96-FB2A7B6AB748}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{552C5A7A-0EFA-4563-BB96-FB2A7B6AB748}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F596CCCE-B10B-45A3-8AD9-DF6F022663EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F596CCCE-B10B-45A3-8AD9-DF6F022663EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F596CCCE-B10B-45A3-8AD9-DF6F022663EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F596CCCE-B10B-45A3-8AD9-DF6F022663EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
