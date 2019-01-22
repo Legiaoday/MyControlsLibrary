@@ -7,17 +7,30 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Width="58" Height="20">
     <Grid Name="mainGrid" Background="Brown" MinHeight="20" MinWidth="58">
-        <TextBox x:Name="numberTxt" Text="" PreviewTextInput="NumberTxt_PreviewTextInput" PreviewKeyDown="NumberTxt_PreviewKeyDown" CommandManager.PreviewExecuted="NumberTxt_PreviewExecuted" TextAlignment="Right" Margin="0,0,24,0"/>
-        <Button x:Name="upButton" Click="upButton_Click" Background="#FFB6B6B6"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="24" Height="10"/>
-        <Button x:Name="downButton" Click="downButton_Click" Background="#FFB6B6B6"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="24" Height="10"/>
-        <Polygon Fill="Black" Stroke="Gray" Margin="0,-3,6,0" IsHitTestVisible="False" HorizontalAlignment="Right" Width="11" Height="11" VerticalAlignment="Top">
+        <!--mainGrid is divided into two rows. '1*' means that each row will take equal space in the grid, if the second row's Height were to be '2*' that would mean that the second row would take twice as much space as the first row.
+        It's the same thing as percentage: 
+            1* and 1* = 50% and 50%.
+            2* and 2* = 50% and 50% too
+            1* and 2* = 33% and 66%
+            and so on...
+        These rows are being used so that upButton and downButton each take half of the height of mainGrid while still stretching properly, but numberTxt the take whole height of mainGrid-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <!--Grid.Row is an attribute of a grid element, it assigns that element to a row. Row number 0 is the first one, row 1 is the second one, row 2 is the third one, and so on...
+        Grid.RowSpan is also an attribute of a grid element, the number 2 means that that element will take up two rows of space starting on the row defined in Grid.Row.-->
+        <TextBox x:Name="numberTxt" Text="" PreviewTextInput="NumberTxt_PreviewTextInput" PreviewKeyDown="NumberTxt_PreviewKeyDown" CommandManager.PreviewExecuted="NumberTxt_PreviewExecuted" Grid.Row="0" Grid.RowSpan="2" TextAlignment="Right" Margin="0,0,24,0"/>
+        <Button x:Name="upButton" Click="upButton_Click" Background="#FFB6B6B6"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="24"/>
+        <Button x:Name="downButton" Click="downButton_Click" Background="#FFB6B6B6"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Right" Width="24"/>
+        <Polygon Fill="Black" Stroke="Gray" Margin="0,-3,6,0" IsHitTestVisible="False"  Grid.Row="0" HorizontalAlignment="Right" Width="11" VerticalAlignment="Center">
             <Polygon.Points>
                 <Point X="10" Y="10" />
                 <Point X="5" Y="5" />
                 <Point X="0" Y="10" />
             </Polygon.Points>
         </Polygon>
-        <Polygon Fill="Black" Stroke="Gray"  Margin="0,0,6,-4" IsHitTestVisible="False" HorizontalAlignment="Right" Width="11" Height="11" VerticalAlignment="Bottom">
+        <Polygon Fill="Black" Stroke="Gray"  Margin="0,-3,6,-4" IsHitTestVisible="False"  Grid.Row="1" HorizontalAlignment="Right" Width="11" VerticalAlignment="Center">
             <Polygon.Points>
                 <Point X="10" Y="0" />
                 <Point X="5" Y="5" />
