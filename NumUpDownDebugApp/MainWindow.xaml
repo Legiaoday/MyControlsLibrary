@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <controls:NumericUpDown Width="Auto" Height="Auto" Margin="196,180,397,152"/>
+        <controls:NumericUpDown HorizontalAlignment="Left" Height="20" Margin="93,101,0,0" VerticalAlignment="Top" Width="209"/>
+
     </Grid>
 </Window>
