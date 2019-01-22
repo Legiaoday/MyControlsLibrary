@@ -8,8 +8,8 @@
              d:DesignHeight="450" d:DesignWidth="800" Width="58" Height="20">
     <Grid Name="mainGrid" Background="Brown" MinHeight="20" MinWidth="58">
         <TextBox x:Name="numberTxt" Text="" PreviewTextInput="NumberTxt_PreviewTextInput" PreviewKeyDown="NumberTxt_PreviewKeyDown" CommandManager.PreviewExecuted="NumberTxt_PreviewExecuted" TextAlignment="Right" Margin="0,0,24,0"/>
-        <Button x:Name="upButton" Click="upButton_Click" Height="10" Background="#FFB6B6B6"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="24" />
-        <Button x:Name="downButton" Click="downButton_Click" Background="#FFB6B6B6"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" HorizontalAlignment="Right" Width="24" Height="10" VerticalAlignment="Bottom" />
+        <Button x:Name="upButton" Click="upButton_Click" Background="#FFB6B6B6"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="24" Height="10"/>
+        <Button x:Name="downButton" Click="downButton_Click" Background="#FFB6B6B6"  Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="24" Height="10"/>
         <Polygon Fill="Black" Stroke="Gray" Margin="0,-3,6,0" IsHitTestVisible="False" HorizontalAlignment="Right" Width="11" Height="11" VerticalAlignment="Top">
             <Polygon.Points>
                 <Point X="10" Y="10" />
