@@ -22,6 +22,10 @@ namespace NumUpDownDebugApp
         public MainWindow()
         {
             InitializeComponent();
+            nUpDown.AllowNegative = true;
+            //nUpDown.IsTextBoxReadOnly = false;
+            nUpDown.MaxValue = 100;
+            nUpDown.MinValue = 0;
         }
     }
 }
