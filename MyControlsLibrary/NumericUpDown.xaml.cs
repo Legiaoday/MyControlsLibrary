@@ -24,15 +24,17 @@ namespace MyControlsLibrary
 
         private void NumberTxt_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-
-        }
-
-        private void NumberTxt_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-
+            if (!char.IsDigit(e.Text, e.Text.Length - 1))
+                e.Handled = true;
         }
 
         private void NumberTxt_PreviewExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Command == ApplicationCommands.Paste)
+                e.Handled = true;
+        }
+
+        private void NumberTxt_PreviewKeyDown(object sender, KeyEventArgs e)
         {
 
         }
@@ -51,7 +53,6 @@ namespace MyControlsLibrary
                 numberTxt.Text = "1";
             }
         }
-
 
         private void downButton_Click(object sender, RoutedEventArgs e) 
         {
