@@ -171,5 +171,15 @@
         <member name="F:MyControlsLibrary.TBDragEventArgs.MousePosition">
             <summary>Mouse cursor position over the desktop when the event is called.</summary>
         </member>
+        <member name="T:MyControlsLibrary.NumericUpDown">
+            <summary>
+            NumericUpDown
+            </summary>
+        </member>
+        <member name="M:MyControlsLibrary.NumericUpDown.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
     </members>
 </doc>
