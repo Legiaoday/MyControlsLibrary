@@ -165,8 +165,8 @@ namespace MyControlsLibrary
         /// <summary>Sets whether or not holding down the button will increase/decrease the number rapidly. Default value is true.</summary>
         public bool HoldDownToIncrease { get; set; } = true;
 
-        private byte holdDownSpeed = 8;
-        /// <summary>The speed which the number will increase/decrease when the user holds down the button (only works if HoldDownToIncrease is set to true). Can only accept values between 1 and 100. Default value is 8.</summary>
+        private byte holdDownSpeed = 6;
+        /// <summary>The speed which the number will increase/decrease when the user holds down the button (only works if HoldDownToIncrease is set to true). Can only accept values between 1 and 100. Default value is 6.</summary>
         public byte HoldDownSpeed
         {
             get { return holdDownSpeed; }
