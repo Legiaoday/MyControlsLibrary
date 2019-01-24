@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -123,25 +124,96 @@ namespace MyControlsLibrary
         #endregion
 
         #region Increment/decrement number
+        private CancellationTokenSource cancelTokenSrc = new CancellationTokenSource();
+        private bool isHoldingDownButton = false;
+
         private void upButton_Click(object sender, RoutedEventArgs e)
         {
-            increaseNumber();
-        }
-
-        private void increaseNumber()
-        {
-            ++Value;
+            if (!HoldDownToIncrease) ++Value;
         }
 
         private void downButton_Click(object sender, RoutedEventArgs e)
         {
-            decreaseNumber();
-        } 
+            if (!HoldDownToIncrease) --Value;
+        }
 
-        private void decreaseNumber ()
+        private async void increaseNumber()
         {
-            --Value;
+            isHoldingDownButton = true;
+
+            while (isHoldingDownButton)
+            {
+                try
+                {
+                    ++Value;//this must come before the await otherwise the number won't increase if the mouse/up event action were lesser than 1000/holdDownSpeed in milliseconds
+                    await Task.Delay(1000 / holdDownSpeed, cancelTokenSrc.Token);
+                }
+                catch (TaskCanceledException ex)
+                {
+                }
+            }
+        }
+
+        private void UpButton_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (HoldDownToIncrease) increaseNumber();
+        }
+
+        private void UpButton_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (HoldDownToIncrease) cancelToken();
+        }
+
+        private async void decreaseNumber()
+        {
+            isHoldingDownButton = true;
+
+            while (isHoldingDownButton)
+            {
+                try
+                {
+                    --Value;//this must come before the await otherwise the number won't decrease if the mouse/up event action were lesser than 1000/holdDownSpeed in milliseconds
+                    await Task.Delay(1000 / holdDownSpeed, cancelTokenSrc.Token);
+                }
+                catch (TaskCanceledException ex)
+                {
+                }
+            }
+        }
+
+        private void DownButton_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (HoldDownToIncrease) decreaseNumber();
+        }
+
+        private void DownButton_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (HoldDownToIncrease) cancelToken();
+        }
+
+        public void cancelToken()
+        {
+            isHoldingDownButton = false;
+            cancelTokenSrc.Cancel();
+            cancelTokenSrc = new CancellationTokenSource();
         }
         #endregion
+
+        /// <summary>Sets whether or not holding down the button will increase/decrease the number rapidly. Default value is true.</summary>
+        public bool HoldDownToIncrease { get; set; } = true;
+
+        private short holdDownSpeed = 10;//values from 1 to 100, 1 being the slowest. Default value 10.
+        /// <summary>The speed which the number will increase/decrease when the user holds down the button (only works if HoldDownToIncrease is set to true). Can only accept values between 1 and 100. Default value is 10.</summary>
+        public short HoldDownSpeed
+        {
+            get { return holdDownSpeed; }
+            set
+            {
+                if (value > 0 && value <= 100)
+                    holdDownSpeed = value;
+                else
+                    MessageBox.Show("Value out of range. Only values between 1 and 100 can be assign to HoldDownSpeed.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

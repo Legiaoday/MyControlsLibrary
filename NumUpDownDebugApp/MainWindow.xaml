@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:NumUpDownDebugApp"
         xmlns:controls="clr-namespace:MyControlsLibrary;assembly=MyControlsLibrary"
         mc:Ignorable="d"
-        Title="MainWindow" Height="234.534" Width="354.767">
+        Title="MainWindow" Height="234.534" Width="354.767" WindowStartupLocation="CenterScreen">
     <Grid>
         <controls:NumericUpDown Name="nUpDown" HorizontalAlignment="Left" Height="20" Margin="10,10,0,0" VerticalAlignment="Top" Width="249"/>
     </Grid>

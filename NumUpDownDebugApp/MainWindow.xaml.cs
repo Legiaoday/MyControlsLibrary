@@ -26,7 +26,9 @@ namespace NumUpDownDebugApp
             nUpDown.AllowNegative = true;
             nUpDown.IsTextBoxReadOnly = true;
             nUpDown.ShowValueOutOfRangeErrors = false;
-            nUpDown.MaxValue = 10;
+            nUpDown.HoldDownToIncrease = true;
+            nUpDown.HoldDownSpeed = 10;
+            nUpDown.MaxValue = 100;
             nUpDown.MinValue = 0;
             nUpDown.Value = 5;
         }
