@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MyControlsLibrary
 {
@@ -53,6 +45,8 @@ namespace MyControlsLibrary
 
         private void NumberTxt_PreviewKeyDown(object sender, KeyEventArgs e)
         {
+            TextBoxPreviewKeyDown?.Invoke(sender, e);//checks if the handler is not null and then triggers the event. The handler is only valid when the class using this library assigns the public event PreviewKeyDown to an event of that class
+
             //if (e.Key == Key.Back)
             //{
             //    if (numberTxt.Text.Length == 2 && numberTxt.Text[0] == '-' && numberTxt.CaretIndex == 2)
@@ -69,11 +63,25 @@ namespace MyControlsLibrary
             //        e.Handled = true;
             //    }
             //}
-            /*else*/ if (e.Key == Key.Space)
+            /*else*/
+            if (e.Key == Key.Space)
             {
                 e.Handled = true;
             }
         }
+
+        private void NumberTxt_PreviewKeyUp(object sender, KeyEventArgs e)
+        {
+            TextBoxPreviewKeyUp?.Invoke(sender, e);//checks if the handler is not null and then triggers the event. The handler is only valid when the class using this library assigns the public event PreviewKeyDown to an event of that class
+        }
+        #endregion
+
+        #region Public events
+        /// <summary>Occurs when the user presses down a key on the text box.</summary>
+        public event KeyEventHandler TextBoxPreviewKeyDown;
+
+        /// <summary>Occurs when the user releases a key on the text box.</summary>
+        public event KeyEventHandler TextBoxPreviewKeyUp;
         #endregion
 
         #region Generic public properties
@@ -339,8 +347,7 @@ namespace MyControlsLibrary
         {
             if (!HoldDownToIncrease) --Value;
         }
-        #endregion
 
-        
+        #endregion
     }
 }

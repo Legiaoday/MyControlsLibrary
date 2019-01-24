@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace NumUpDownDebugApp
 {
@@ -20,6 +9,8 @@ namespace NumUpDownDebugApp
         {
             InitializeComponent();
 
+            nUpDown.TextBoxPreviewKeyDown += textBox_PreviewKeyDown;
+            nUpDown.TextBoxPreviewKeyUp += textBox_PreviewKeyUp;
             nUpDown.AllowNegative = true;
             nUpDown.IsTextBoxReadOnly = false;
             nUpDown.ShowValueOutOfRangeErrors = false;
@@ -29,6 +20,16 @@ namespace NumUpDownDebugApp
             nUpDown.MaxValue = 1000;
             nUpDown.MinValue = -1000;
             nUpDown.Value = 5;//setting nUpDown.MinValue to 1 also sets nUpDown.Value to 1
+        }
+
+        private void textBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void textBox_PreviewKeyUp(object sender, KeyEventArgs e)
+        {
+
         }
     }
 }

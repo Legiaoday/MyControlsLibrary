@@ -176,6 +176,40 @@
             NumericUpDown
             </summary>
         </member>
+        <member name="E:MyControlsLibrary.NumericUpDown.TextBoxPreviewKeyDown">
+            <summary>Occurs when the user presses down a key on the text box.</summary>
+        </member>
+        <member name="E:MyControlsLibrary.NumericUpDown.TextBoxPreviewKeyUp">
+            <summary>Occurs when the user releases a key on the text box.</summary>
+        </member>
+        <member name="P:MyControlsLibrary.NumericUpDown.ShowValueOutOfRangeErrors">
+            <summary>Sets whether or not show error messages when Value is out of range. Default value is false.</summary>
+        </member>
+        <member name="P:MyControlsLibrary.NumericUpDown.AllowNegative">
+            <summary>Sets whether or not the numeric up/down control should allow negative numbers. Default value is true.</summary>
+        </member>
+        <member name="P:MyControlsLibrary.NumericUpDown.IsTextBoxReadOnly">
+            <summary>Sets whether or not the text box is read only. Default value is true.</summary>
+        </member>
+        <member name="P:MyControlsLibrary.NumericUpDown.Value">
+            <summary>Current value of the numeric up/down text box.</summary>
+        </member>
+        <member name="P:MyControlsLibrary.NumericUpDown.MaxValue">
+            <summary>Maximum value the numeric text box can hold. Default value is 2,147,483,647.</summary>
+        </member>
+        <member name="P:MyControlsLibrary.NumericUpDown.MinValue">
+            <summary>Minimum value the numeric text box can hold. Default value is -2,147,483,648 or 0 if AllowNegative is false.</summary>
+        </member>
+        <member name="P:MyControlsLibrary.NumericUpDown.GradualSpeedIndex">
+            <summary>Sets how fast the numbers will increase the longer the user hold down the button. Accepts values betweeen 1 and 10.
+            1 means that the gradual increase in speed is disabled and 2 is the slowest value possible. Default value is 10.</summary>
+        </member>
+        <member name="P:MyControlsLibrary.NumericUpDown.HoldDownToIncrease">
+            <summary>Sets whether or not holding down the button will increase/decrease the number rapidly. Default value is true.</summary>
+        </member>
+        <member name="P:MyControlsLibrary.NumericUpDown.HoldDownSpeed">
+            <summary>The speed which the number will increase/decrease when the user holds down the button (only works if HoldDownToIncrease is set to true). Can only accept values between 1 and 100. Default value is 6.</summary>
+        </member>
         <member name="M:MyControlsLibrary.NumericUpDown.InitializeComponent">
             <summary>
             InitializeComponent
