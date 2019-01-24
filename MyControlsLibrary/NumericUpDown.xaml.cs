@@ -25,21 +25,54 @@ namespace MyControlsLibrary
         }
 
         #region Generic events
-        private void NumberTxt_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            if (!char.IsDigit(e.Text, e.Text.Length - 1))
-                e.Handled = true;
-        }
-
         private void NumberTxt_PreviewExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             if (e.Command == ApplicationCommands.Paste)
                 e.Handled = true;
         }
 
+        private void NumberTxt_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!char.IsDigit(e.Text, e.Text.Length - 1))
+            {
+                if (e.Text == "-" && AllowNegative)
+                {
+                    if (numberTxt.Text.Length == 0 || numberTxt.SelectionLength == 0 && numberTxt.CaretIndex == 0 && char.IsDigit(numberTxt.Text, 0))
+                    {
+                        numberTxt.Text = "-" + numberTxt.Text;
+                    }
+                }
+
+                e.Handled = true;
+            }
+            else if (numberTxt.Text.Length > 0 && numberTxt.Text[0] == '-' && numberTxt.CaretIndex == 0)
+            {
+                e.Handled = true;
+            }    
+        }
+
         private void NumberTxt_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-
+            //if (e.Key == Key.Back)
+            //{
+            //    if (numberTxt.Text.Length == 2 && numberTxt.Text[0] == '-' && numberTxt.CaretIndex == 2)
+            //    {
+            //        numberTxt.Text = "";
+            //        e.Handled = true;
+            //    }
+            //}
+            //else if (e.Key == Key.Delete)
+            //{
+            //    if (numberTxt.Text.Length == 2 && numberTxt.Text[0] == '-' && numberTxt.CaretIndex == 1)
+            //    {
+            //        numberTxt.Text = "";
+            //        e.Handled = true;
+            //    }
+            //}
+            /*else*/ if (e.Key == Key.Space)
+            {
+                e.Handled = true;
+            }
         }
         #endregion
 
@@ -79,9 +112,24 @@ namespace MyControlsLibrary
                 catch(FormatException ex)
                 {
                     cancelToken();//showing a message while the user is holding down a button will interrupt the mouse down event without triggering the mouse up event, this needs to be here otherwise the incrementer/decrementer will run forever
-                    MessageBox.Show("Error parsing numberTxt.Text.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-                    numberTxt.Text = minValue.ToString();
-                    return minValue -1;//it's complicated to explain, but the -1 is needed here (mainly when the action that called the get was ++Value)
+                    if(numberTxt.Text != "-" && numberTxt.Text != "")
+                        MessageBox.Show("Error parsing numberTxt.Text.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    
+                    numberTxt.Text = MinValue.ToString();
+                    return MinValue -1;//it's complicated to explain, but the -1 is needed here (mainly when the action that called the get was ++Value)
+                }
+                catch (OverflowException)
+                {
+                    if (numberTxt.Text.Length > 0 && numberTxt.Text[0] == '-')
+                    {
+                        numberTxt.Text = MinValue.ToString();
+                        return MinValue - 1;//it's complicated to explain, but the -1 is needed here (mainly when the action that called the get was ++Value)
+                    }
+                    else
+                    {
+                        numberTxt.Text = MaxValue.ToString();
+                        return MaxValue + 1;//it's complicated to explain, but the +1 is needed here (mainly when the action that called the get was --Value)
+                    }
                 }
                 catch (Exception)
                 {
@@ -90,13 +138,29 @@ namespace MyControlsLibrary
             }
             set
             {
-                if (value >= minValue && value <= maxValue)
-                    if (value >= 0 || AllowNegative)
-                        numberTxt.Text = value.ToString();
+                if (value >= MinValue)
+                {
+                    if (value <= maxValue)
+                    {
+                        if (value >= 0 || AllowNegative)
+                            numberTxt.Text = value.ToString();
+                        else
+                        {
+                            numberTxt.Text = MinValue.ToString();
+                            if (ShowValueOutOfRangeErrors) MessageBox.Show("Value cannot be negative. Negative numbers are not allowed unless AllowNegative is set to true.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }
                     else
-                        if (ShowValueOutOfRangeErrors) MessageBox.Show("Value cannot be negative. Negative numbers are not allowed unless AllowNegative is set to true.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    {
+                        numberTxt.Text = MaxValue.ToString();
+                        if (ShowValueOutOfRangeErrors) MessageBox.Show("Value is out of range. Value must be lesser or equal to MaxValue.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
                 else
-                   if (ShowValueOutOfRangeErrors) MessageBox.Show("Value is out of range. Value must be great or equal to MinValue and lesser or equal to MaxValue.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                {
+                    numberTxt.Text = MinValue.ToString();
+                    if (ShowValueOutOfRangeErrors) MessageBox.Show("Value is out of range. Value must be great or equal to MinValue.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                }     
             }
         }
 
@@ -107,7 +171,7 @@ namespace MyControlsLibrary
             get { return maxValue; }
             set
             {
-                if (value > minValue)
+                if (value > MinValue)
                     if (value >= 0 || AllowNegative)//checks if negative numbers are allowed
                         maxValue = value;
                     else
@@ -115,7 +179,7 @@ namespace MyControlsLibrary
                 else
                     MessageBox.Show("MaxValue cannot be lower or equal to MinValue.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
 
-                numberTxt.Text = minValue.ToString();
+                numberTxt.Text = MinValue.ToString();
             }
         }
 
