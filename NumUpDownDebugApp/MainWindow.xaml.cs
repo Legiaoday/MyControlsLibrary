@@ -27,10 +27,11 @@ namespace NumUpDownDebugApp
             nUpDown.IsTextBoxReadOnly = true;
             nUpDown.ShowValueOutOfRangeErrors = false;
             nUpDown.HoldDownToIncrease = true;
-            nUpDown.HoldDownSpeed = 10;
-            nUpDown.MaxValue = 100;
-            nUpDown.MinValue = 0;
-            nUpDown.Value = 5;
+            nUpDown.HoldDownSpeed = 8;
+            nUpDown.GradualSpeedIndex = 10;
+            nUpDown.MaxValue = 1000;
+            nUpDown.MinValue = 1;
+            nUpDown.Value = 1;
         }
     }
 }

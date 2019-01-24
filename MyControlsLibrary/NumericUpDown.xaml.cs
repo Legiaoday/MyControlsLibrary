@@ -47,8 +47,8 @@ namespace MyControlsLibrary
         /// <summary>Sets whether or not show error messages when Value is out of range. Default value is false.</summary>
         public bool ShowValueOutOfRangeErrors { get; set; } = false;
 
-        /// <summary>Sets whether or not the numeric up/down control should allow negative numbers. Default value is false.</summary>
-        public bool AllowNegative { get; set; } = false;
+        /// <summary>Sets whether or not the numeric up/down control should allow negative numbers. Default value is true.</summary>
+        public bool AllowNegative { get; set; } = true;
 
         /// <summary>Sets whether or not the text box is read only. Default value is true.</summary>
         public bool IsTextBoxReadOnly
@@ -68,7 +68,7 @@ namespace MyControlsLibrary
                 }
                 catch(FormatException ex)
                 {
-                    MessageBox.Show("Error parsing numberTxt.Text.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    //MessageBox.Show("Error parsing numberTxt.Text.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
                     return minValue;
                 }
                 catch (Exception)
@@ -126,32 +126,80 @@ namespace MyControlsLibrary
         #region Increment/decrement number
         private CancellationTokenSource cancelTokenSrc = new CancellationTokenSource();
         private bool isHoldingDownButton = false;
+        private byte gradualSpeedCycles = 0;//used to tell how many cycles have passed, 1 cycle = 1 call to updateGradualSpeed(). gradualSpeedModifier only starts to be increased once a certain threshold of cycles have been passed.
+        private byte gradualSpeedModifier = 0;//used gradually change in real time the speed of the increment/decrement of the number when holding down the button
+        private const byte c_maxGradualSpeedIndex = 10;//only used to avoid magic numbers
+        private const byte c_maxGradualSpeedModifier = 100;//only used to avoid magic numbers
 
-        private void upButton_Click(object sender, RoutedEventArgs e)
+        private byte gradualSpeedIndex = 10;
+        /// <summary>Sets how fast the numbers will increase the longer the user hold down the button. Accepts values betweeen 1 and 10.
+        /// 1 means that the gradual increase in speed is disabled and 2 is the slowest value possible. Default value is 10.</summary>
+        public byte GradualSpeedIndex
         {
-            if (!HoldDownToIncrease) ++Value;
+            get { return gradualSpeedIndex; }
+            set
+            {
+                if (value > 0 && value <= 10)
+                    gradualSpeedIndex = value;
+                else
+                    MessageBox.Show("Value out of range. Only values between 1 and 10 can be assigned to GradualSpeedIndex.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
-        private void downButton_Click(object sender, RoutedEventArgs e)
+        /// <summary>Sets whether or not holding down the button will increase/decrease the number rapidly. Default value is true.</summary>
+        public bool HoldDownToIncrease { get; set; } = true;
+
+        private byte holdDownSpeed = 10;
+        /// <summary>The speed which the number will increase/decrease when the user holds down the button (only works if HoldDownToIncrease is set to true). Can only accept values between 1 and 100. Default value is 10.</summary>
+        public byte HoldDownSpeed
         {
-            if (!HoldDownToIncrease) --Value;
+            get { return holdDownSpeed; }
+            set
+            {
+                if (value > 0 && value <= 100)
+                    holdDownSpeed = value;
+                else
+                    MessageBox.Show("Value out of range. Only values between 1 and 100 can be assigned to HoldDownSpeed.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private async void increaseNumber()
         {
             isHoldingDownButton = true;
+            gradualSpeedModifier = 0;//resets the modifier
+            gradualSpeedCycles = gradualSpeedIndex;//makes it start on a higher cycle so that the greater gradualSpeedIndex is, the fast the gradual increase in speed will occur
 
             while (isHoldingDownButton)
             {
                 ++Value;//this must come before the await otherwise the number won't increase if the mouse/up event action were lesser than 1000/holdDownSpeed in milliseconds
+                if (gradualSpeedIndex > 1) updateGradualSpeed();//1 = no gradual speed increase
+
                 try
                 {
-                    await Task.Delay(1000/holdDownSpeed, cancelTokenSrc.Token);
+                    await Task.Delay(1000/(holdDownSpeed+gradualSpeedModifier), cancelTokenSrc.Token);//theorically speaking the max value that (holdDownSpeed+gradualSpeedModifier) can have is 200 and a minimum delay of 5 milliseconds
                 }
                 catch (TaskCanceledException ex)
                 {
                 }
             }
+        }
+
+        private void updateGradualSpeed()
+        {
+            if (gradualSpeedModifier <= c_maxGradualSpeedModifier)
+            {
+                if (gradualSpeedCycles == c_maxGradualSpeedIndex)
+                {
+                    ++gradualSpeedModifier;
+                    gradualSpeedCycles = gradualSpeedIndex;//makes it start on a higher cycle so that the greater gradualSpeedIndex is, the fast the gradual increase in speed will occur
+                }
+                else
+                    ++gradualSpeedCycles;
+            }
+            //else
+            //{
+            //    MessageBox.Show("gradualSpeedModifier max value reached!");
+            //}
         }
 
         private void UpButton_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -167,13 +215,17 @@ namespace MyControlsLibrary
         private async void decreaseNumber()
         {
             isHoldingDownButton = true;
+            gradualSpeedModifier = 0;//resets the modifier
+            gradualSpeedCycles = gradualSpeedIndex;//makes it start on a higher cycle so that the greater gradualSpeedIndex is, the fast the gradual increase in speed will occur
 
             while (isHoldingDownButton)
             {
-                --Value;//this must come before the await otherwise the number won't decrease if the mouse/up event action were lesser than 1000/holdDownSpeed in milliseconds
+                --Value;//this must come before the await otherwise the number won't increase if the mouse/up event action were lesser than 1000/holdDownSpeed in milliseconds
+                if (gradualSpeedIndex > 1) updateGradualSpeed();//1 = no gradual speed increase
+
                 try
                 {
-                    await Task.Delay(1000/holdDownSpeed, cancelTokenSrc.Token);
+                    await Task.Delay(1000 / (holdDownSpeed + gradualSpeedModifier), cancelTokenSrc.Token);//theorically speaking the max value that (holdDownSpeed+gradualSpeedModifier) can have is 200 and a minimum delay of 5 milliseconds
                 }
                 catch (TaskCanceledException ex)
                 {
@@ -197,27 +249,16 @@ namespace MyControlsLibrary
             cancelTokenSrc.Cancel();
             cancelTokenSrc = new CancellationTokenSource();
         }
-        #endregion
 
-        private byte gradualSpeedModifier = 0;//used gradually change in real time the speed of the increment/decrement of the number when holding down the button
-
-        private byte gradualSpeedIndex = 1;//values between 1 and 10. 1 being the default value
-
-        /// <summary>Sets whether or not holding down the button will increase/decrease the number rapidly. Default value is true.</summary>
-        public bool HoldDownToIncrease { get; set; } = true;
-
-        private byte holdDownSpeed = 10;
-        /// <summary>The speed which the number will increase/decrease when the user holds down the button (only works if HoldDownToIncrease is set to true). Can only accept values between 1 and 100. Default value is 10.</summary>
-        public byte HoldDownSpeed
+        private void upButton_Click(object sender, RoutedEventArgs e)
         {
-            get { return holdDownSpeed; }
-            set
-            {
-                if (value > 0 && value <= 100)
-                    holdDownSpeed = value;
-                else
-                    MessageBox.Show("Value out of range. Only values between 1 and 100 can be assigned to HoldDownSpeed.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            if (!HoldDownToIncrease) ++Value;
         }
+
+        private void downButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!HoldDownToIncrease) --Value;
+        }
+        #endregion
     }
 }
