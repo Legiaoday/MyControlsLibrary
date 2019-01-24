@@ -199,12 +199,14 @@ namespace MyControlsLibrary
         }
         #endregion
 
+        private byte gradualSpeedIndex = 1;//values between 1 and 10. 1 being the default value
+
         /// <summary>Sets whether or not holding down the button will increase/decrease the number rapidly. Default value is true.</summary>
         public bool HoldDownToIncrease { get; set; } = true;
 
-        private short holdDownSpeed = 10;//values from 1 to 100, 1 being the slowest. Default value 10.
+        private byte holdDownSpeed = 10;
         /// <summary>The speed which the number will increase/decrease when the user holds down the button (only works if HoldDownToIncrease is set to true). Can only accept values between 1 and 100. Default value is 10.</summary>
-        public short HoldDownSpeed
+        public byte HoldDownSpeed
         {
             get { return holdDownSpeed; }
             set
@@ -212,7 +214,7 @@ namespace MyControlsLibrary
                 if (value > 0 && value <= 100)
                     holdDownSpeed = value;
                 else
-                    MessageBox.Show("Value out of range. Only values between 1 and 100 can be assign to HoldDownSpeed.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Value out of range. Only values between 1 and 100 can be assigned to HoldDownSpeed.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
