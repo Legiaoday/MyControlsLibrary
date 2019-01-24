@@ -21,7 +21,7 @@ namespace NumUpDownDebugApp
             InitializeComponent();
 
             nUpDown.AllowNegative = true;
-            nUpDown.IsTextBoxReadOnly = true;
+            nUpDown.IsTextBoxReadOnly = false;
             nUpDown.ShowValueOutOfRangeErrors = false;
             nUpDown.HoldDownToIncrease = true;
             nUpDown.HoldDownSpeed = 6;
