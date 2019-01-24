@@ -40,52 +40,50 @@ namespace MyControlsLibrary
         {
 
         }
-
-        private void upButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                int temp = Int32.Parse(numberTxt.Text);
-
-                temp++;
-                numberTxt.Text = temp.ToString();
-            }
-            catch (FormatException ex)
-            {
-                numberTxt.Text = "1";
-            }
-        }
-
-        private void downButton_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                int temp = Int32.Parse(numberTxt.Text);
-
-                if (temp > 0)
-                {
-                    temp--;
-                    numberTxt.Text = temp.ToString();
-                }
-            }
-            catch (FormatException ex)
-            {
-                numberTxt.Text = "0";
-            }
-        }
         #endregion
 
         #region Generic public properties
-        /// <summary>Sets whether or not the numeric up/down should allow negative numbers. Default value is false.</summary>
+        /// <summary>Sets whether or not show error messages when Value is out of range. Default value is false.</summary>
+        public bool ShowValueOutOfRangeErrors { get; set; } = false;
+
+        /// <summary>Sets whether or not the numeric up/down control should allow negative numbers. Default value is false.</summary>
         public bool AllowNegative { get; set; } = false;
 
         /// <summary>Sets whether or not the text box is read only. Default value is true.</summary>
         public bool IsTextBoxReadOnly
         {
             get { return numberTxt.IsReadOnly; }
+            set { numberTxt.IsReadOnly = value; }
+        }
+
+        /// <summary>Current value of the numeric up/down text box.</summary>
+        public int Value
+        {
+            get
+            {
+                try
+                {
+                    return Int32.Parse(numberTxt.Text);
+                }
+                catch(FormatException ex)
+                {
+                    MessageBox.Show("Error parsing numberTxt.Text.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return minValue;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
             set
             {
-                numberTxt.IsReadOnly = value;
+                if (value >= minValue && value <= maxValue)
+                    if (value >= 0 || AllowNegative)
+                        numberTxt.Text = value.ToString();
+                    else
+                        if (ShowValueOutOfRangeErrors) MessageBox.Show("Value cannot be negative. Negative numbers are not allowed unless AllowNegative is set to true.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                else
+                   if (ShowValueOutOfRangeErrors) MessageBox.Show("Value is out of range. Value must be great or equal to MinValue and lesser or equal to MaxValue.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -121,7 +119,29 @@ namespace MyControlsLibrary
                 else
                     MessageBox.Show("MinValue cannot be greater or equal to MaxValue.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+        #endregion
+
+        #region Increment/decrement number
+        private void upButton_Click(object sender, RoutedEventArgs e)
+        {
+            increaseNumber();
+        }
+
+        private void increaseNumber()
+        {
+            ++Value;
+        }
+
+        private void downButton_Click(object sender, RoutedEventArgs e)
+        {
+            decreaseNumber();
         } 
+
+        private void decreaseNumber ()
+        {
+            --Value;
+        }
         #endregion
     }
 }
