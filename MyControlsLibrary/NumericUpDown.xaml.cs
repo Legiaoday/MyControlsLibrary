@@ -143,10 +143,10 @@ namespace MyControlsLibrary
 
             while (isHoldingDownButton)
             {
+                ++Value;//this must come before the await otherwise the number won't increase if the mouse/up event action were lesser than 1000/holdDownSpeed in milliseconds
                 try
                 {
-                    ++Value;//this must come before the await otherwise the number won't increase if the mouse/up event action were lesser than 1000/holdDownSpeed in milliseconds
-                    await Task.Delay(1000 / holdDownSpeed, cancelTokenSrc.Token);
+                    await Task.Delay(1000/holdDownSpeed, cancelTokenSrc.Token);
                 }
                 catch (TaskCanceledException ex)
                 {
@@ -170,10 +170,10 @@ namespace MyControlsLibrary
 
             while (isHoldingDownButton)
             {
+                --Value;//this must come before the await otherwise the number won't decrease if the mouse/up event action were lesser than 1000/holdDownSpeed in milliseconds
                 try
                 {
-                    --Value;//this must come before the await otherwise the number won't decrease if the mouse/up event action were lesser than 1000/holdDownSpeed in milliseconds
-                    await Task.Delay(1000 / holdDownSpeed, cancelTokenSrc.Token);
+                    await Task.Delay(1000/holdDownSpeed, cancelTokenSrc.Token);
                 }
                 catch (TaskCanceledException ex)
                 {
@@ -198,6 +198,8 @@ namespace MyControlsLibrary
             cancelTokenSrc = new CancellationTokenSource();
         }
         #endregion
+
+        private byte gradualSpeedModifier = 0;//used gradually change in real time the speed of the increment/decrement of the number when holding down the button
 
         private byte gradualSpeedIndex = 1;//values between 1 and 10. 1 being the default value
 
