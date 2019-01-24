@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace NumUpDownDebugApp
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -29,9 +26,9 @@ namespace NumUpDownDebugApp
             nUpDown.HoldDownToIncrease = true;
             nUpDown.HoldDownSpeed = 8;
             nUpDown.GradualSpeedIndex = 10;
-            nUpDown.MaxValue = 1000;
-            nUpDown.MinValue = 1;
-            nUpDown.Value = 1;
+            //nUpDown.MaxValue = 100;
+            //nUpDown.MinValue = 1;
+            //nUpDown.Value = 1;
         }
     }
 }

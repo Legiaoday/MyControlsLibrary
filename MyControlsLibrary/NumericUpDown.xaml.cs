@@ -20,8 +20,8 @@ namespace MyControlsLibrary
         public NumericUpDown()
         {
             InitializeComponent();
-            if (!AllowNegative) minValue = 0;
             numberTxt.IsReadOnly = true;
+            AllowNegative = true;//needed to trigger AllowNegative's set and setup the minValue variable and numberTxt.Text
         }
 
         #region Generic events
@@ -47,8 +47,18 @@ namespace MyControlsLibrary
         /// <summary>Sets whether or not show error messages when Value is out of range. Default value is false.</summary>
         public bool ShowValueOutOfRangeErrors { get; set; } = false;
 
+        private bool allowNegative = true;
         /// <summary>Sets whether or not the numeric up/down control should allow negative numbers. Default value is true.</summary>
-        public bool AllowNegative { get; set; } = true;
+        public bool AllowNegative
+        {
+            get { return allowNegative; }
+            set
+            {
+                allowNegative = value;
+                if (!value && minValue < 0) minValue = 0;
+                numberTxt.Text = minValue.ToString();
+            }
+        }
 
         /// <summary>Sets whether or not the text box is read only. Default value is true.</summary>
         public bool IsTextBoxReadOnly
@@ -68,8 +78,10 @@ namespace MyControlsLibrary
                 }
                 catch(FormatException ex)
                 {
-                    //MessageBox.Show("Error parsing numberTxt.Text.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return minValue;
+                    cancelToken();//showing a message while the user is holding down a button will interrupt the mouse down event without triggering the mouse up event, this needs to be here otherwise the incrementer/decrementer will run forever
+                    MessageBox.Show("Error parsing numberTxt.Text.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                    numberTxt.Text = minValue.ToString();
+                    return minValue -1;//it's complicated to explain, but the -1 is needed here (mainly when the action that called the get was ++Value)
                 }
                 catch (Exception)
                 {
@@ -102,6 +114,8 @@ namespace MyControlsLibrary
                         MessageBox.Show("MaxValue cannot be negative. Negative numbers are not allowed.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
                 else
                     MessageBox.Show("MaxValue cannot be lower or equal to MinValue.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                numberTxt.Text = minValue.ToString();
             }
         }
 
@@ -119,6 +133,8 @@ namespace MyControlsLibrary
                         MessageBox.Show("MinValue cannot be begative. Negative numbers are not allowed.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
                 else
                     MessageBox.Show("MinValue cannot be greater or equal to MaxValue.", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                numberTxt.Text = minValue.ToString();
             }
         }
         #endregion
@@ -149,8 +165,8 @@ namespace MyControlsLibrary
         /// <summary>Sets whether or not holding down the button will increase/decrease the number rapidly. Default value is true.</summary>
         public bool HoldDownToIncrease { get; set; } = true;
 
-        private byte holdDownSpeed = 10;
-        /// <summary>The speed which the number will increase/decrease when the user holds down the button (only works if HoldDownToIncrease is set to true). Can only accept values between 1 and 100. Default value is 10.</summary>
+        private byte holdDownSpeed = 8;
+        /// <summary>The speed which the number will increase/decrease when the user holds down the button (only works if HoldDownToIncrease is set to true). Can only accept values between 1 and 100. Default value is 8.</summary>
         public byte HoldDownSpeed
         {
             get { return holdDownSpeed; }
@@ -260,5 +276,7 @@ namespace MyControlsLibrary
             if (!HoldDownToIncrease) --Value;
         }
         #endregion
+
+        
     }
 }
